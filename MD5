@@ -1,0 +1,15 @@
+c4b736a7657e382106c88f27f2e4c9c4 *DESCRIPTION
+6b47b4e14ef885174c7d1e9cf5aed6a5 *LICENSE
+c4c742f6bcbdfba7805432dd74a57247 *NAMESPACE
+15e782441cfce20718ee970bd24af404 *R/spinners.R
+f306a5f12c67da0709cb7ad503bb11a1 *R/waiter.R
+d0c390daa0b968d009e3a8089321ac27 *R/zzz.R
+ee0a6c89164335ec564e236e89726fdf *README.md
+e045158798de31fcd88d95dd22af4b81 *inst/assets/custom.js
+8fe1acd43c29629b59a913a55450e850 *inst/assets/please-wait.css
+6b1ba800f96f7e14283dedd08741c5ff *inst/assets/please-wait.min.js
+612d20964bf8e62ffe96e0a15401646a *inst/assets/spinkit.css
+fbbd8cda90532fb135965108d1ca0b31 *inst/examples/app.R
+1082136331fa6e0793922d707496c55b *man/figures/logo.png
+68f3898b566fdd7069491673e869a283 *man/spinners.Rd
+9791a085ad39946385fcd64f4598e736 *man/waiter.Rd
