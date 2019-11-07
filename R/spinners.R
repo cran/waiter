@@ -126,6 +126,75 @@ spin_circle <- function(){
 
 #' @rdname spinners
 #' @export
+spin_rotate <- function(){
+  div(
+    class = "spinner-box",
+    div(
+      class = "circle-border",
+      div(class = "circle-core")
+    )
+  )
+}
+
+#' @rdname spinners
+#' @export
+spin_solar <- function(){
+  div(
+    class = "spinner-box",
+    div(
+      class = "earth-orbit orbit",
+      div(
+        class = "planet earth"
+      ),
+      div(
+        class = "venus-orbit orbit",
+        div(
+          class = "planet venus"
+        ),
+        div(
+          class = "mercury-orbit orbit",
+          div(
+            class = "planet mercury"
+          ),
+          div(class = "sun")
+        )
+      )
+    )
+  )
+}
+
+#' @rdname spinners
+#' @export
+spin_orbit <- function(){
+  div(
+    class = "spinner-box",
+    div(class = "blue-orbit leo"),
+    div(class = "green-orbit leo"),
+    div(class = "red-orbit leo"),
+    div(class = "white-orbit w1 leo"),
+    div(class = "white-orbit w2 leo"),
+    div(class = "white-orbit w3 leo")
+  )
+}
+
+#' @rdname spinners
+#' @export
+spin_squares <- function(){
+  div(
+    class = "spinner-box",
+    div(
+      class = "configure-border-1",
+      div(class = "configure-core")
+    ),
+    div(
+      class = "configure-border-2",
+      div(class = "configure-core")
+    )
+  )
+}
+
+#' @rdname spinners
+#' @export
 spin_cube_grid <- function(){
   div(
     class = "sk-cube-grid",
@@ -143,6 +212,121 @@ spin_cube_grid <- function(){
 
 #' @rdname spinners
 #' @export
+spin_circles <- function(){
+	div(class = "lds-circle")
+}
+
+#' @rdname spinners
+#' @export
+spin_orbiter <- function(){
+	div(
+    class = "orbiter-spinner",
+    div(
+      class = "orbiter",
+      class = "orbiter",
+      class = "orbiter"
+    )
+  )
+}
+
+#' @rdname spinners
+#' @export
+spin_pixel <- function(){
+	div(class = "pixel-spinner", div(class = "pixel-spinner-inner"))
+}
+
+#' @rdname spinners
+#' @export
+spin_flower <- function(){
+	div(
+    class = "flower-spinner",
+    div(
+      class = "dots-container",
+      div(
+        class = "bigger-dot",
+        div(
+          class = "smaller-dot"
+        )
+      )
+    )
+  )
+}
+
+#' @rdname spinners
+#' @export
+spin_dual_ring <- function(){
+	div(class = "lds-dual-ring")
+}
+
+#' @rdname spinners
+#' @export
+spin_heart <- function(){
+	div(
+    class = "lds-heart",
+		div()
+	)
+}
+
+#' @rdname spinners
+#' @export
+spin_ellipsis <- function(){
+	div(
+    class = "lds-ellipsis",
+		div(),
+		div(),
+		div(),
+		div()
+	)
+}
+
+#' @rdname spinners
+#' @export
+spin_facebook <- function(){
+	div(
+    class = "lds-facebook",
+		div(),
+		div(),
+		div()
+	)
+}
+
+#' @rdname spinners
+#' @export
+spin_hourglass <- function(){
+	div(class = "lds-hourglass")
+}
+
+#' @rdname spinners
+#' @export
+spin_ring <- function(){
+	div(
+    class = "lds-ring",
+		div(),
+		div(),
+		div(),
+		div()
+	)
+}
+
+#' @rdname spinners
+#' @export
+spin_ripple <- function(){
+	div(
+    class = "lds-ripple",
+		div(),
+		div()
+	)
+}
+
+#' @rdname spinners
+#' @export
 browse_spinners <- function() {
-	shiny::runApp(appDir = system.file("examples", package = 'waiter', mustWork = TRUE))
+	.Deprecated("browse_waiters")
+	shiny::runApp(appDir = system.file("waiter", package = 'waiter', mustWork = TRUE))
+}
+
+#' @rdname spinners
+#' @export
+browse_waiters <- function() {
+	shiny::runApp(appDir = system.file("waiter", package = 'waiter', mustWork = TRUE))
 }

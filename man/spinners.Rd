@@ -12,8 +12,24 @@
 \alias{spin_chasing_dots}
 \alias{spin_three_bounce}
 \alias{spin_circle}
+\alias{spin_rotate}
+\alias{spin_solar}
+\alias{spin_orbit}
+\alias{spin_squares}
 \alias{spin_cube_grid}
+\alias{spin_circles}
+\alias{spin_orbiter}
+\alias{spin_pixel}
+\alias{spin_flower}
+\alias{spin_dual_ring}
+\alias{spin_heart}
+\alias{spin_ellipsis}
+\alias{spin_facebook}
+\alias{spin_hourglass}
+\alias{spin_ring}
+\alias{spin_ripple}
 \alias{browse_spinners}
+\alias{browse_waiters}
 \title{Spinners}
 \usage{
 spin_rotating_plane()
@@ -36,9 +52,41 @@ spin_three_bounce()
 
 spin_circle()
 
+spin_rotate()
+
+spin_solar()
+
+spin_orbit()
+
+spin_squares()
+
 spin_cube_grid()
 
+spin_circles()
+
+spin_orbiter()
+
+spin_pixel()
+
+spin_flower()
+
+spin_dual_ring()
+
+spin_heart()
+
+spin_ellipsis()
+
+spin_facebook()
+
+spin_hourglass()
+
+spin_ring()
+
+spin_ripple()
+
 browse_spinners()
+
+browse_waiters()
 }
 \description{
 Spinkit spinners to use with \code{\link{show_waiter}}.

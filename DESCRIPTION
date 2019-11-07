@@ -1,7 +1,7 @@
 Package: waiter
 Title: Loading Screen for 'Shiny'
-Version: 0.0.1
-Date: 2019-03-10
+Version: 0.0.6
+Date: 2019-11-06
 Authors@R: 
     person(given = "John",
            family = "Coene",
@@ -11,11 +11,11 @@ Description: Full screen splash loading screens for 'Shiny'.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Imports: shiny
-RoxygenNote: 6.1.1
+Imports: R6, shiny, magrittr
+RoxygenNote: 6.1.99.9001
 NeedsCompilation: no
-Packaged: 2019-03-11 08:39:14 UTC; jcoe
+Packaged: 2019-11-07 09:24:05 UTC; jcoe
 Author: John Coene [aut, cre]
 Maintainer: John Coene <jcoenep@gmail.com>
 Repository: CRAN
-Date/Publication: 2019-03-13 13:30:02 UTC
+Date/Publication: 2019-11-07 09:40:02 UTC
