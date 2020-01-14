@@ -64,6 +64,7 @@ use_butler <- function(){
 #' @rdname butler
 #' @export
 show_butler <- function(){
+  .Deprecated("Waitress", package = "waiter", "The butler is deprecated in favour of the `Waitress`")
   session <- shiny::getDefaultReactiveDomain()
   .check_session(session)
   session$sendCustomMessage("butler-show", list())
@@ -72,6 +73,7 @@ show_butler <- function(){
 #' @rdname butler
 #' @export
 hide_butler <- function(){
+  .Deprecated("Waitress", package = "waiter", "The butler is deprecated in favour of the `Waitress`")
   session <- shiny::getDefaultReactiveDomain()
   .check_session(session)
   session$sendCustomMessage("butler-hide", list())
@@ -81,6 +83,7 @@ hide_butler <- function(){
 #' @export
 config_butler <- function(thickness = 5, colors = list("0" = "red", ".3" = "blue", "1" = "green"),
 	shadow_blur = 5, shadow_color = "rgba(0, 0, 0, .5)"){
+  .Deprecated("Waitress", package = "waiter", "The butler is deprecated in favour of the `Waitress`")
 
 	opts <- list(
 		autoRun = TRUE,
@@ -94,7 +97,15 @@ config_butler <- function(thickness = 5, colors = list("0" = "red", ".3" = "blue
   session$sendCustomMessage("butler-config", opts)
 }
 
-#' @rdname butler
+#' Butler R6 Class
+#' 
+#' Create a butler.
+#' 
+#' @details
+#' Create an object to show a loading bar to display at the top of 
+#' the application.
+#' 
+#' @name butlerClass
 #' @export
 Butler <- R6::R6Class(
   "butler",
@@ -114,6 +125,7 @@ Butler <- R6::R6Class(
       colors = list("0" = "red", ".3" = "blue", "1" = "green"),
 	    shadow_blur = 5, 
       shadow_color = "rgba(0, 0, 0, .5)"){
+      .Deprecated("Waitress", package = "waiter", "The butler is deprecated in favour of the `Waitress`")
 
       private$.thickness <- thickness
       private$.colors <- colors
@@ -132,6 +144,11 @@ Butler <- R6::R6Class(
       private$get_session()
       private$.session$sendCustomMessage("butler-show", list())
     },
+#' @details
+#' print the butler
+		print = function(){
+      cat("A butler\n")
+		},
 #' @details
 #' Hide the butler.
 #' 

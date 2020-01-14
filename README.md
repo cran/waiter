@@ -1,397 +1,153 @@
-[![Travis build status](https://travis-ci.org/JohnCoene/waiter.svg?branch=master)](https://travis-ci.org/JohnCoene/waiter)
 
-<img src="./man/figures/logo.png" align = "right" height = "170px" />
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+<div align="center">
+
+<img src="./man/figures/logo.png" height = "200px" />
 
 # waiter
 
-Loading screens for Shiny; programatically show and hide partial or full page loading screens, comes with multiple spinners.
+Loading screens for Shiny
 
-* [Features](#features)
-* [Installation](#installation)
-* [How-to](#how-to)
-* [Demo](https://shiny.john-coene.com/waiter/)
-* [Examples](#examples)
-* [Credit](#credit)
+<!-- badges: start -->
 
-## Features
+[![Travis build
+status](https://travis-ci.org/JohnCoene/waiter.svg?branch=master)](https://travis-ci.org/JohnCoene/waiter)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/JohnCoene/waiter?branch=master&svg=true)](https://ci.appveyor.com/project/JohnCoene/waiter)
+<!-- badges: end -->
 
-The {waiter} package has evolved since version `0.0.1` and now includes:
+[Website](https://waiter.john-coene.com) |
+[Demo](https://shiny.john-coene.com/waiter/) | [Get
+Started](https://waiter.john-coene.com/#/waiter)
 
-* A waiter, splash loading screens.
-* A waitress, loading bars on on elements or whole screen.
-* A butler, infinite loading bar.
+</div>
 
-You can see the difference between each member of staff [here](https://shiny.john-coene.com/waiter/).
+The waiter lets you programmatically show and hide partial or full page
+loading screens with spinners or loading bars to keep your users
+patiently waiting as you load or compute fancy things.
 
-## Installation
-
-Stable version from CRAN:
-
-```r
-install.packages("waiter")
-```
-
-Development version from Github: 
-
-``` r
-# install.packages("remotes")
-remotes::install_github("JohnCoene/waiter")
-```
-
-## How to
-
-### Waiter
-
-1. Place `use_waiter` anywhere in your UI.
-2. Programatically call `show_waiter`.
-3. Don't forget to programatically hide the loading screen with `hide_waiter`.
-
-Since version `0.0.2` you can also place `show_waiter_on_load` in your UI, _below_ `use_waiter` in order to show a loading screen prior to the `session` loads, this splash screen is not programatically triggered but is also hidden with `hide_waiter`.
-
-See `?spinners` for a list of all the spinners.
-
-### Waitress
-
-Note that the waitress is a reference class.
-
-1. Place `use_waitress` anywhere in your UI.
-2. Set up the waitress in your server with `call_waitress` or `Waitress$new()`.
-3. Programatically call the `set`, `increase`, and `auto` _methods_.
-4. Don't forget to programatically hide the loading screen with the `hide` _method_.
-
-See `?waitress` for the documentation.
-
-### butler
-
-1. Place `use_butler` anywhere in your UI.
-2. Call `show_butler` in your server.
-3. Don't forget to programatically hide the loading screen with `hide_butler`.
-
-You can, optionally, configure the butler with `config_butler`.
-
-## Demos
-
-The demos below are also on the [website](https://shiny.john-coene.com/waiter/).
-
-### waiter
-
-Browse the spinners locally with `waiter::browse_waiters()`
-
-![](./man/figures/waiter.gif)
-
-### waitress
-
-Browse waitresses locally with `waiter::browse_waitresses()`
-
-![](./man/figures/waitress.gif)
-
-### butler
-
-![](./man/figures/butler.gif)
+| Feature           | Waiter               | Waitress             | Hostess              |
+| :---------------- | :------------------- | :------------------- | :------------------- |
+| Progress Bar      | :white\_check\_mark: | :white\_check\_mark: | :white\_check\_mark: |
+| Full Screen       | :white\_check\_mark: | :white\_check\_mark: | :x:                  |
+| Works with waiter | :white\_check\_mark: | :x:                  | :white\_check\_mark: |
+| Spinner           | :white\_check\_mark: | :x:                  | :x:                  |
+| Updatable         | :white\_check\_mark: | :x:                  | :x:                  |
+| Notifications     | :x:                  | :white\_check\_mark: | :x:                  |
 
 ## Examples
 
-### waiter
+Below are simple examples of applications that use the package, consult
+the [website](https://waiter.john-coene.com) for more.
 
-Basic example could be like this.
+## Waiter
+
+To use the waiter:
+
+1.  Include `use_waiter` in your UI.
+2.  Trigger `show_waiter` to show the waiting screen.
+3.  Eventually trigger `hide_waiter` to hide the loading screen.
+
+<!-- end list -->
 
 ``` r
 library(shiny)
 library(waiter)
- 
+
 ui <- fluidPage(
-  use_waiter(),
+  use_waiter(), # include dependencies
+  waiter_show_on_load(),
   actionButton("show", "Show loading for 3 seconds")
 )
 
 server <- function(input, output, session){
+
   observeEvent(input$show, {
-    show_waiter(spin_fading_circles())
-    Sys.sleep(3) # do something that takes time
-    hide_waiter()
-  })
-}
 
-if(interactive()) shinyApp(ui, server)
-```
-
-Since version `0.0.4` you can show on loading screen on app launch. The loading screen will launch prior to anything, even the Shiny session. Note that in `0.0.4` some content flashed before the loader appeared, this has been fixed in `0.0.5`.
-
-Though this function is not programatically launched it still has to be hidden with `hide_waiter`. Ensure you place `show_waiter_on_load` after `use_waiter` and at _the very end of your UI_, also set `include_js` to `FALSE`, in `use_waiter`.
-
-```r
-library(shiny)
-library(waiter)
-
-Sy.sleep(1)
- 
-ui <- fluidPage(
-  use_waiter(include_js = FALSE), # do not include js
-  h3("Content you will only see after loading screen has disappeared"),
-	show_waiter_on_load(spin_fading_circles()) # place at the bottom
-)
-
-server <- function(input, output, session){
-  Sys.sleep(3) # do something that takes time
-  hide_waiter()
-}
-
-if(interactive()) shinyApp(ui, server)
-```
-
-How it is used in [chirp.sh](https://chirp.sh), where it is combined with [pushbar](https://github.com/JohnCoene/pushbar) to get rid of the navbar alltogether.
-
-```r
-library(shiny)
-library(waiter)
-
-ui <- navbarPage(
-  "example",
-  id = "tabs",
-    header = list(
-        tags$style("nav{display:none;}") # hide navbar
-    ),
-  tabPanel(
-    "home",
-    use_waiter(),
-    br(),
-    actionButton("switch", "Go to networks tab")
-  ),
-  tabPanel(
-    "networks",
-    h3("Hello!")
-  )
-)
-
-server <- function(input, output, session){
-  observeEvent(input$switch, {
-
-    # show loading
-    show_waiter(
-      tagList(
-        spin_folding_cube(),
-        span("Loading ...", style = "color:white;")
-      )
+    waiter_show( # show the waiter
+      spin_fading_circles() # use a spinner
     )
-    # long~ish computation
-    Sys.sleep(3)
 
-    # send to "hidden" tab
-    updateTabsetPanel(session = session, inputId = "tabs", selected = "networks")
-
-    # hide loading
-    hide_waiter()
+    Sys.sleep(3) # do something that takes time
+    
+    waiter_hide() # hide the waiter
   })
+  
 }
 
 shinyApp(ui, server)
 ```
 
-You can, since version `0.0.6` update the `html` of the waiting screen while it's loading.
+![](man/figures//waiter-basic.gif)
 
-```r
-library(shiny)
-library(waiter)
- 
-ui <- fluidPage(
-  use_waiter(),
-  actionButton("show", "Show loading with updates")
-)
+The waiter includes more options to customise the spinner, the
+background, show the waiter on load, etc.
 
-server <- function(input, output, session){
-  observeEvent(input$show, {
-    show_waiter(span("Initialisation", style = "color:white;"))
-    Sys.sleep(2)
-    for(i in 1:5){
-      HTML <- span(paste("Loading #", i, "of 5"), style = "color:white;z-index:999;")
-      update_waiter(html = HTML)
-      Sys.sleep(2)
-    }
-    hide_waiter()
-  })
-}
+### Waitress
 
-if(interactive()) shinyApp(ui, server)
-```
+To use the waitress:
 
-### waitress
+1.  Include `use_waitress` in your UI.
+2.  Initialise a waitress from the `Waitress` object with the `new`
+    method.
+3.  You must then call the `start`.
+4.  On the waitress object use the `increase` method to increase the
+    progress bar.
+5.  Use the `hide` method when done.
 
-The waitress can be applied to a specific element or the whole page. Note that `call_waitress` and `Waitress$new()` takes a CSS selector, so if you want to apply it to a plot use `#plotId`.
+<!-- end list -->
 
-```r
+``` r
 library(shiny)
 library(waiter)
 
 ui <- fluidPage(
-	use_waitress(),
-	plotOutput("plot", width = 400)
+  use_waitress(),
+  p("App content")
 )
 
 server <- function(input, output){
 
-	waitress <- call_waitress("#plot") # call the waitress
+  # call the waitress
+  waitress <- Waitress$
+    new(theme = "overlay-percent")$
+    start() # start
 
-	output$plot <- renderPlot({
-		waitress$start() # start the waitress
+  for(i in 1:10){
+    waitress$increase(10) # increase by 10%
+    Sys.sleep(.3)
+  }
 
-		dat <- vector()
-
-		for(i in 1:10){
-			waitress$increase(10) # increase by 10%
-			Sys.sleep(.3)
-			dat <- c(dat, sample(1:100, 1))
-		}
-
-		hist(dat)
-		waitress$hide() # hide when done
-	})
+  # hide when it's done
+  waitress$hide() 
 
 }
 
 shinyApp(ui, server)
 ```
 
-Because the waitress takes a seclector, we can apply it to different parts of the page, using a class or any other selector, like the `nav`.
+![](man/figures//waitress-basic.gif)
 
-```r
-library(shiny)
-library(waiter)
+There are more options to the waitress, you can have it overlay any
+element (such as the navbar), automagically increment it, etc.
 
-ui <- navbarPage(
-	"Waitress on nav",
-	tabPanel(
-		"home",
-		use_waitress(),
-		plotOutput("plot")
-	)
-)
+## Get it
 
-server <- function(input, output){
+You can install waiter from
+[CRAN](https://CRAN.R-project.org/package=waiter).
 
-	waitress <- call_waitress("nav", theme = "overlay") # call the waitress
-
-	output$plot <- renderPlot({
-		waitress$start() # start the waitress
-
-		dat <- vector()
-
-		for(i in 1:10){
-			waitress$increase(10) # increase by 10%
-			Sys.sleep(.5)
-			dat <- c(dat, sample(1:100, 1))
-		}
-
-		hist(dat)
-		waitress$hide() # hide when done
-	})
-
-}
-
-shinyApp(ui, server)
+``` r
+install.packages("waiter")
 ```
 
-If you do not specify a selector to `call_waitress` then it is applied to the whole page. Note that you can change the color of the waitress in `use_waitress`.
+Or the development version from Github with:
 
-```r
-library(shiny)
-library(waiter)
-
-ui <- fluidPage(
-	use_waitress(color = "#7F7FFF"),
-	h2("waitress on entire page"),
-	actionButton("load", "load")
-)
-
-server <- function(input, output){
-
-	waitress <- Waitress$new(theme = "overlay-percent") # call the waitress
-
-	observeEvent(input$load, {
-		waitress$
-			start()$
-			auto(percent = 5, ms = 150) # increase by 5 percent every 150 milliseconds
-		Sys.sleep(3.5)
-		waitress$hide()
-	})
-
-}
-
-shinyApp(ui, server)
+``` r
+install.packages("remotes")
+remotes::install_github("JohnCoene/waiter")
 ```
 
-### butler
-
-Basic example.
-
-```r
-library(shiny)
-library(butler)
-
-ui <- fluidPage(
-	use_butler(),
-	br(),
-	actionButton("show", "show butler"),
-	actionButton("hide", "hide butler")
-)
-
-server <- function(input, output){
-
-	observeEvent(input$show,{
-		show_butler()
-	})
-
-	observeEvent(input$hide,{
-		hide_butler()
-	})
-
-}
-
-shinyApp(ui, server)
-```
-
-You can configure the butler to look differently.
-
-```r
-library(shiny)
-library(butler)
-
-ui <- fluidPage(
-	use_butler(),
-	br(),
-	br(),
-	actionButton("show", "show butler"),
-	actionButton("hide", "hide butler")
-)
-
-server <- function(input, output){
-
-	config_butler(
-		thickness = 10,
-		colors = list(
-			"0" = "red",
-			".4" = "white",
-			"1" = "blue"
-		)
-	)
-
-	observeEvent(input$show,{
-		show_butler()
-	})
-
-	observeEvent(input$hide,{
-		hide_butler()
-	})
-
-}
-
-shinyApp(ui, server)
-```
-
-## Credit
-
-Underlying CSS and JavaScript libraries that enable waiter:
-
-- [Please Wait](https://github.com/Pathgather/please-wait)
-- [Spinkit CSS](https://tobiasahlin.com/spinkit/)
-- [Topbar](https://github.com/buunguyen/topbar)
-- [Progress.js](https://usablica.github.io/progress.js/)
+Please note that the ‘waiter’ project is released with a [Contributor
+Code of Conduct](https://waiter.john-coene.com/#/coc). By contributing
+to this project, you agree to abide by its terms.

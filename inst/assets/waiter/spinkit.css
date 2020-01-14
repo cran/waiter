@@ -1,9 +1,17 @@
+body > .inner {
+  display: none;
+}
+
+body.pg-loaded > .inner {
+  display: block;
+}
+
 .rotating-plane {
   width: 40px;
   height: 40px;
   background-color: #fff;
 
-  margin: 100px auto;
+  margin: 0 auto; 
   -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
   animation: sk-rotateplane 1.2s infinite ease-in-out;
 }
@@ -32,7 +40,7 @@
   height: 40px;
 
   position: relative;
-  margin: 100px auto;
+  margin: 0 auto; 
 }
 
 .double-bounce1, .double-bounce2 {
@@ -70,7 +78,7 @@
 }
 
 .waver {
-  margin: 100px auto;
+  margin: 0 auto; 
   width: 50px;
   height: 40px;
   text-align: center;
@@ -123,7 +131,7 @@
 }
 
 .wandering-cubes {
-  margin: 100px auto;
+  margin: 0 auto; 
   width: 40px;
   height: 40px;
   position: relative;
@@ -175,7 +183,7 @@
 .pulser {
   width: 40px;
   height: 40px;
-  margin: 100px auto;
+  margin: 0 auto; 
   background-color: #fff;
 
   border-radius: 100%;  
@@ -203,7 +211,7 @@
 }
 
 .chasing-dots {
-  margin: 100px auto;
+  margin: 0 auto; 
   width: 40px;
   height: 40px;
   position: relative;
@@ -294,7 +302,7 @@
 }
 
 .sk-circle {
-  margin: 100px auto;
+  margin: 0 auto; 
   width: 40px;
   height: 40px;
   position: relative;
@@ -418,7 +426,7 @@
 .sk-cube-grid {
   width: 40px;
   height: 40px;
-  margin: 100px auto;
+  margin: 0 auto; 
 }
 
 .sk-cube-grid .sk-cube {
@@ -478,7 +486,7 @@
 }
 
 .sk-fading-circle {
-  margin: 100px auto;
+  margin: 0 auto; 
   width: 40px;
   height: 40px;
   position: relative;
@@ -703,7 +711,7 @@
 
 /* KEYFRAMES */
 
-@keyframes spin {
+@keyframes spin2 {
   from {
     transform: rotate(0);
   }
@@ -712,7 +720,7 @@
   }
 }
 
-@keyframes spin3D {
+@keyframes spin3D2 {
   from {
     transform: rotate3d(.5,.5,.5, 360deg);
   }
@@ -790,15 +798,15 @@
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background: rgb(63,249,220);
-  background: linear-gradient(0deg, rgba(63,249,220,0.1) 33%, rgba(63,249,220,1) 100%);
-  animation: spin3D 1.8s linear 0s infinite;
+  background: rgb(255,255,255);
+  background: linear-gradient(0deg, rgba(63,249,220,0.1) 33%, rgba(255,255,255,1) 100%);
+  animation: spin3D2 1.8s linear 0s infinite;
 }
 
 .leo-core-1 {
   width: 100%;
   height: 100%;
-  background-color: #37474faa;
+  background-color: #ffffff;
   border-radius: 50%;
 }
 
@@ -811,15 +819,15 @@
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background: rgb(63,249,220);
-  background: linear-gradient(0deg, rgba(255, 171, 145,0.1) 33%, rgba(255, 171, 145,1) 100%);
-  animation: spin3D 2.2s linear 0s infinite;
+  background: rgb(255,255,255);
+  background: linear-gradient(0deg, rgba(255, 171, 145,0.1) 33%, rgba(255,255,255, 1) 100%);
+  animation: spin3D2 2.2s linear 0s infinite;
 }
 
 .leo-core-2 {
   width: 100%;
   height: 100%;
-  background-color: #ffab91aa;
+  background-color: #ffffff;
   border-radius: 50%;
 }
 
@@ -833,15 +841,15 @@
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background: rgb(63,249,220);
-  background: linear-gradient(0deg, rgba(63,249,220,0.1) 33%, rgba(63,249,220,1) 100%);
-  animation: spin .8s linear 0s infinite;
+  background: rgb(255,255,255);
+  background: linear-gradient(0deg, rgba(63,249,220,0.1) 33%, rgba(255,255,255, 1) 100%);
+  animation: spin2 .8s linear 0s infinite;
 }
 
 .circle-core {
   width: 100%;
   height: 100%;
-  background-color: #37474f;
+  background-color: #ffffff;
   border-radius: 50%;
 }
 
@@ -855,7 +863,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #ffab91;
+  background: #ffffff;
   animation: configure-clockwise 3s ease-in-out 0s infinite alternate;
 }
 
@@ -867,7 +875,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgb(63,249,220);
+  background: rgb(255,255,255);
   transform: rotate(45deg);
   animation: configure-xclockwise 3s ease-in-out 0s infinite alternate;
 }
@@ -875,7 +883,7 @@
 .configure-core {
   width: 100%;
   height: 100%;
-  background-color: #37474f;
+  background-color: #ffffff;
 }
 
 /* PULSE BUBBLES */
@@ -891,7 +899,7 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: #3ff9dc;
+  background-color: #ffffff;
 }
 
 .pulse-bubble-1 {
@@ -919,26 +927,26 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border: 1px solid #ffffffa5;
+	border: 1px solid #ffffff;
 	border-radius: 50%;
 }
 
 .earth-orbit {
 	width: 165px;
 	height: 165px;
-  -webkit-animation: spin 12s linear 0s infinite;
+  -webkit-animation: spin2 12s linear 0s infinite;
 }
 
 .venus-orbit {
 	width: 120px;
 	height: 120px;
-  -webkit-animation: spin 7.4s linear 0s infinite;
+  -webkit-animation: spin2 7.4s linear 0s infinite;
 }
 
 .mercury-orbit {
 	width: 90px;
 	height: 90px;
-  -webkit-animation: spin 3s linear 0s infinite;
+  -webkit-animation: spin2 3s linear 0s infinite;
 }
 
 .planet {
@@ -947,14 +955,14 @@
   width: 10px;
   height: 10px;
 	border-radius: 50%;
-  background-color: #3ff9dc;
+  background-color: #ffffff;
 }
 
 .sun {
 	width: 35px;
 	height: 35px;
 	border-radius: 50%;
-	background-color: #ffab91;
+	background-color: #ffffff;
 }
 
 .leo {
@@ -968,29 +976,29 @@
 .blue-orbit {
 	width: 165px;
 	height: 165px;
-  border: 1px solid #91daffa5;
-  -webkit-animation: spin3D 3s linear .2s infinite;
+  border: 1px solid #ffffff;
+  -webkit-animation: spin3D2 3s linear .2s infinite;
 }
 
 .green-orbit {
 	width: 120px;
 	height: 120px;
-  border: 1px solid #91ffbfa5;
-  -webkit-animation: spin3D 2s linear 0s infinite;
+  border: 1px solid #ffffff;
+  -webkit-animation: spin3D2 2s linear 0s infinite;
 }
 
 .red-orbit {
 	width: 90px;
 	height: 90px;
-  border: 1px solid #ffca91a5;
-  -webkit-animation: spin3D 1s linear 0s infinite;
+  border: 1px solid #ffffff;
+  -webkit-animation: spin3D2 1s linear 0s infinite;
 }
 
 .white-orbit {
 	width: 60px;
 	height: 60px;
   border: 2px solid #ffffff;
-  -webkit-animation: spin3D 10s linear 0s infinite;
+  -webkit-animation: spin3D2 10s linear 0s infinite;
 }
 
 .w1 {

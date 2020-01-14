@@ -1,6 +1,11 @@
 #' Spinners
 #'
 #' Spinkit spinners to use with \code{\link{show_waiter}}.
+#' 
+#' @param id The spinner identifier, an integer between \code{1},
+#' and \code{42}.
+#' @param style CSS style to apply to spinner.
+#' @param color Desired color of spinner.
 #'
 #' @details You can browse the spinners with \code{browse_spinners}.
 #'
@@ -320,13 +325,329 @@ spin_ripple <- function(){
 
 #' @rdname spinners
 #' @export
-browse_spinners <- function() {
-	.Deprecated("browse_waiters")
-	shiny::runApp(appDir = system.file("waiter", package = 'waiter', mustWork = TRUE))
+spin_terminal <- function(){
+  div(class = "waiter-terminal")
+}
+
+#' @rdname spinners
+#' @export
+spin_loader <- function(){
+  div(class = "spinner-loader")
+}
+
+#' @rdname spinners
+#' @export
+spin_throbber <- function(){
+  div(class = "throbber-loader")
+}
+
+#' @rdname spinners
+#' @export
+spin_refresh <- function(){
+  div(class = "refreshing-loader")
+}
+
+#' @rdname spinners
+#' @export
+spin_heartbeat <- function(){
+  div(class = "heartbeat-loader")
+}
+
+#' @rdname spinners
+#' @export
+spin_gauge <- function(){
+  div(class = "gauge-loader")
+}
+
+#' @rdname spinners
+#' @export
+spin_3k <- function(){
+  div(class = "three-quarters-loader")
+}
+
+#' @rdname spinners
+#' @export
+spin_wobblebar <- function(){
+  div(class = "wobblebar-loader")
+}
+
+#' @rdname spinners
+#' @export
+spin_atebits <- function(){
+  div(class = "atebits-loader")
+}
+
+#' @rdname spinners
+#' @export
+spin_whirly <- function(){
+  div(class = "whirly-loader")
+}
+
+#' @rdname spinners
+#' @export
+spin_flowers <- function(){
+  div(class = "flower-loader")
+}
+
+#' @rdname spinners
+#' @export
+spin_dots <- function(){
+  div(class = "dots-loader")
+}
+
+#' @rdname spinners
+#' @export
+spin_3circles <- function(){
+  div(class = "circles-loader")
+}
+
+#' @rdname spinners
+#' @export
+spin_plus <- function(){
+  div(class = "plus-loader")
+}
+
+#' @rdname spinners
+#' @export
+spin_pulsar <- function(){
+  div(class = "pulse-loader")
+}
+
+#' @rdname spinners
+#' @export
+spin_hexdots <- function(){
+  div(class = "hexdots-loader")
+}
+
+#' @rdname spinners
+#' @export
+spin_inner_circles <- function(){
+  div(class = "inner-circles-loader")
+}
+
+#' @rdname spinners
+#' @export
+spin_pong <- function(){
+  div(class = "pong-loader")
+}
+
+#' @rdname spinners
+#' @export
+spin_timer <- function(){
+  div(class = "timer-loader")
+}
+
+#' @rdname spinners
+#' @export
+spin_ball <- function(){
+  div(class = "ball-loader")
+}
+
+#' @rdname spinners
+#' @export
+spin_dual_circle <- function(){
+  div(class = "sbl-circ-dual")
+}
+
+#' @rdname spinners
+#' @export
+spin_seven_circle <- function(){
+  div(
+    class = "sbl-seven-circles",
+    div(),
+    div(),
+    div(),
+    div(),
+    div(),
+    div(),
+    div()
+  )
+}
+
+#' @rdname spinners
+#' @export
+spin_clock <- function(){
+  div(class = "sbl-meter")
+}
+
+#' @rdname spinners
+#' @export
+spin_pushing_shapes <- function(){
+  div(
+    class = "sbl-pushing-shapes",
+    div(),
+    div()
+  )
+}
+
+#' @rdname spinners
+#' @export
+spin_fill <- function(){
+  div(class = "sbl-rect-spin-fill")
+}
+
+#' @rdname spinners
+#' @export
+spin_rhombus <- function(){
+  div(class = "sbl-cirle-to-rhombus")
+}
+
+#' @rdname spinners
+#' @export
+spin_balance <- function(){
+  div(class = "sbl-cirle-balance")
+}
+
+#' @rdname spinners
+#' @export
+spin_square_circle <- function(){
+  div(
+    class = "sbl-cirle-and-square",
+    div(),
+    div(),
+    div(),
+    div()
+  )
+}
+
+#' @rdname spinners
+#' @export
+spin_circle_square <- function(){
+  div(
+    class = "sbl-square-to-circle",
+    div(),
+    div(),
+    div()
+  )
+}
+
+#' @rdname spinners
+#' @export
+spin_puzzle <- function(){
+  div(
+    class = "sbl-puzzle",
+    div(),
+    div(),
+    div(),
+    div(),
+    div()
+  )
+}
+
+#' @rdname spinners
+#' @export
+spin_half <- function(){
+  div(
+    class = "sbl-half-circle-spin",
+    div()
+  )
+}
+
+#' @rdname spinners
+#' @export
+spin_loaders <- function(id = 1, color = "white", style = NULL){
+  stopifnot(id > 0 && id < 43)
+  if(id < 10)
+    id <- paste0("0", id)
+
+  color <- paste0("color:", color, ";")
+
+  if(!is.null(style))
+    style <- paste0(color, style)
+  else
+    style <- color
+  
+  div(class = paste0("loaderz-", id), style = style)
+}
+
+#' @rdname spinners
+#' @export
+spin_1 <- function(){
+  div(
+    class = "container--box",
+    div(
+      class = "box",
+      div(
+        class = "spinner spinner--1"
+      )
+    )
+  )
+}
+
+#' @rdname spinners
+#' @export
+spin_2 <- function(){
+  div(
+    class = "container--box",
+    div(
+      class = "box",
+      div(
+        class = "spinner spinner--2"
+      )
+    )
+  )
+}
+
+#' @rdname spinners
+#' @export
+spin_3 <- function(){
+  div(
+    class = "container--box",
+    div(
+      class = "box",
+      div(
+        class = "spinner spinner--3"
+      )
+    )
+  )
+}
+
+#' @rdname spinners
+#' @export
+spin_4 <- function(){
+  div(
+    class = "container--box",
+    div(
+      class = "box",
+      div(
+        class = "spinner spinner--4"
+      )
+    )
+  )
+}
+
+#' @rdname spinners
+#' @export
+spin_5 <- function(){
+  div(
+    class = "container--box",
+    div(
+      class = "box",
+      div(
+        class = "spinner spinner--5"
+      )
+    )
+  )
+}
+
+#' @rdname spinners
+#' @export
+spin_6 <- function(){
+  div(
+    class = "container--box",
+    div(
+      class = "box",
+      div(
+        class = "spinner spinner--6"
+      )
+    )
+  )
 }
 
 #' @rdname spinners
 #' @export
 browse_waiters <- function() {
-	shiny::runApp(appDir = system.file("waiter", package = 'waiter', mustWork = TRUE))
+  .Deprecated("", package = "waiter", msg = "This function is no longer supported; see the package website.")
+	#shiny::runApp(appDir = system.file("waiter", package = 'waiter', mustWork = TRUE))
+  invisible()
 }

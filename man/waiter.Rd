@@ -3,25 +3,54 @@
 \name{waiter}
 \alias{waiter}
 \alias{use_waiter}
+\alias{waiter_use}
 \alias{show_waiter}
+\alias{waiter_show}
 \alias{show_waiter_on_load}
+\alias{waiter_show_on_load}
 \alias{hide_waiter_on_drawn}
+\alias{waiter_hide_on_render}
 \alias{hide_waiter}
+\alias{waiter_hide}
 \alias{update_waiter}
-\alias{Waiter}
+\alias{waiter_update}
 \title{Waiter}
 \usage{
 use_waiter(include_js = TRUE)
 
-show_waiter(html = "", color = "#333e48", logo = "")
+waiter_use(include_js = TRUE)
+
+show_waiter(
+  html = "",
+  color = "#333e48",
+  logo = "",
+  id = NULL,
+  hide_on_render = FALSE
+)
+
+waiter_show(
+  id = NULL,
+  html = spin_1(),
+  color = "#333e48",
+  logo = "",
+  hide_on_render = !is.null(id)
+)
 
 show_waiter_on_load(html = "", color = "#333e48", logo = "")
 
+waiter_show_on_load(html = spin_1(), color = "#333e48", logo = "")
+
 hide_waiter_on_drawn(id)
 
-hide_waiter()
+waiter_hide_on_render(id)
 
-update_waiter(html = "")
+hide_waiter(id = NULL)
+
+waiter_hide(id = NULL)
+
+update_waiter(html = "", id = NULL)
+
+waiter_update(id = NULL, html = NULL)
 }
 \arguments{
 \item{include_js}{Whether to include the Javascript dependencies, only
@@ -33,7 +62,12 @@ set to \code{FALSE} if you use \code{\link{show_waiter_on_load}}.}
 
 \item{logo}{Logo to display.}
 
-\item{id}{Id of element to hide.}
+\item{id}{Id of element to hide or element on which to show waiter over.}
+
+\item{hide_on_render}{Set to \code{TRUE} to automatically hide the waiter
+when the plot in \code{id} is drawn. Note the latter will only work with
+shiny plots, tables, htmlwidgets, etc. but will not work with arbitrary
+elements.}
 }
 \description{
 Programatically show and hide loading screens.
@@ -41,19 +75,12 @@ Programatically show and hide loading screens.
 \section{Functions}{
 
 \itemize{
- \item{\code{use_waiter}: waiter dependencies to include anywhere in your UI but ideally at the top.}
- \item{\code{show_waiter_on_load}: Show a waiter on page load, before the session is even loaded, include in UI \emph{after} \code{use_waiter}.}
- \item{\code{show_waiter}: Show waiting screen.}
- \item{\code{hide_waiter}: Hide any waiting screen.}
- \item{\code{hide_waiter_on_drawn}: Hide any waiting screen when the output is drawn, useful for outputs that take a long time to draw, \emph{use in \code{ui}}.}
-}
-}
-
-\section{Class}{
-
-Arguments passed to \code{show_waiter} are passed to the initialisation method \code{new}.
-\itemize{
-  \item{\code{Waiter}: initiatlise a Waiter.} 
+ \item{\code{use_waiter} and \code{waiter_use}: waiter dependencies to include anywhere in your UI but ideally at the top.}
+ \item{\code{waiter_show_on_load}: Show a waiter on page load, before the session is even loaded, include in UI \emph{after} \code{use_waiter}.}
+ \item{\code{waiter_show}: Show waiting screen.}
+ \item{\code{waiter_hide}: Hide any waiting screen.}
+ \item{\code{waiter_update}: Update the content \code{html} of the waiting screen.}
+ \item{\code{waiter_hide_on_render}: Hide any waiting screen when the output is drawn, useful for outputs that take a long time to draw, \emph{use in \code{ui}}.}
 }
 }
 
@@ -62,141 +89,25 @@ library(shiny)
 
 ui <- fluidPage(
   use_waiter(), # dependencies
-  show_waiter_on_load(spin_fading_circles()), # shows before anything else 
+  waiter_show_on_load(spin_fading_circles()), # shows before anything else 
   actionButton("show", "Show loading for 5 seconds")
 )
 
 server <- function(input, output, session){
-  hide_waiter() # will hide *on_load waiter
+  waiter_hide() # will hide *on_load waiter
   
   observeEvent(input$show, {
-    show_waiter(
+    waiter_show(
       tagList(
         spin_fading_circles(),
         "Loading ..."
       )
     )
     Sys.sleep(3)
-    hide_waiter()
+    waiter_hide()
   })
 }
 
 if(interactive()) shinyApp(ui, server)
 
-
-## ------------------------------------------------
-## Method `Waiter$new`
-## ------------------------------------------------
-
-\dontrun{Waiter$new()}
-}
-\section{Methods}{
-\subsection{Public methods}{
-\itemize{
-\item \href{#method-new}{\code{Waiter$new()}}
-\item \href{#method-finalize}{\code{Waiter$finalize()}}
-\item \href{#method-show}{\code{Waiter$show()}}
-\item \href{#method-hide}{\code{Waiter$hide()}}
-\item \href{#method-update_waiter}{\code{Waiter$update_waiter()}}
-\item \href{#method-print}{\code{Waiter$print()}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\subsection{Method \code{new()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Waiter$new(html = "", color = "#333e48", logo = "")}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{html}}{HTML content of waiter, generally a spinner, see \code{\link{spinners}}.}
-
-\item{\code{color}}{Background color of loading screen.}
-
-\item{\code{logo}}{Logo to display.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Details}{
-Create a waiter.
-}
-
-\subsection{Examples}{
-\if{html}{\out{<div class="r example copy">}}
-\preformatted{\dontrun{Waiter$new()}
-}
-\if{html}{\out{</div>}}
-
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-finalize"></a>}}
-\subsection{Method \code{finalize()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Waiter$finalize()}\if{html}{\out{</div>}}
-}
-
-\subsection{Details}{
-Hide the waiter.
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-show"></a>}}
-\subsection{Method \code{show()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Waiter$show()}\if{html}{\out{</div>}}
-}
-
-\subsection{Details}{
-Show the waiter.
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-hide"></a>}}
-\subsection{Method \code{hide()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Waiter$hide()}\if{html}{\out{</div>}}
-}
-
-\subsection{Details}{
-Hide the waiter.
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-update_waiter"></a>}}
-\subsection{Method \code{update_waiter()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Waiter$update_waiter(html = "")}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{html}}{HTML content of waiter, generally a spinner, see \code{\link{spinners}}.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Details}{
-Update the waiter's html content.
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-print"></a>}}
-\subsection{Method \code{print()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Waiter$print()}\if{html}{\out{</div>}}
-}
-
-\subsection{Details}{
-print the waiter
-}
-
-}
 }

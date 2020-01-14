@@ -1,3 +1,25 @@
+/* Custom */
+.waiter-overlay{
+  text-align: center;
+  z-index:999;
+  color: white;
+}
+
+.staticParent{
+  position: static;
+}
+
+.waiter-overlay-content{
+  width: 70px;
+  text-align: center;
+  height: 40px;
+  position: absolute;
+  right: 50%;
+  margin-right: -35px;
+  top: 50%;
+  margin-top: -20px;
+}
+
 /* Hide flash */
 body > .inner {
   display: none;
@@ -64,6 +86,7 @@ body.pg-loading {
   margin: 0;
   padding: 0;
   position: static;
+  color: white;
 }
 /* line 59, ../src/please-wait.scss */
 .pg-loading-screen .pg-loading-center-outer {
