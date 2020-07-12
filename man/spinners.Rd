@@ -66,6 +66,7 @@
 \alias{spin_4}
 \alias{spin_5}
 \alias{spin_6}
+\alias{spin_google}
 \alias{browse_waiters}
 \title{Spinners}
 \usage{
@@ -197,6 +198,8 @@ spin_5()
 
 spin_6()
 
+spin_google()
+
 browse_waiters()
 }
 \arguments{
@@ -207,13 +210,21 @@ and \code{42}.}
 
 \item{style}{CSS style to apply to spinner.}
 }
+\value{
+An object of class \code{spinner}.
+}
 \description{
 Spinkit spinners to use with \code{\link{show_waiter}}.
 }
 \details{
-You can browse the spinners with \code{browse_spinners}.
+Much of the \code{CSS} used is to provide those spinners.
+One can greatly reduce the load on the browser by only sourcing
+the CSS for the spinners required. You can find out which CSS kits
+are required to load by using the spinner in the R console as
+shown in the example. This prints the kit and instructions
+to only source the required file.
 }
 \examples{
-if(interactive()) browse_spinners()
+spin_rotating_plane()
 
 }

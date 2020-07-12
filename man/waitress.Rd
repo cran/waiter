@@ -20,7 +20,7 @@ call_waitress(
 browse_waitresses()
 }
 \arguments{
-\item{color, percent_color}{Color of waitress and color of percent text shown when 
+\item{color, percent_color}{Color of waitress and color of percent text shown when
 \code{theme} is set to \code{overlay-percent}.}
 
 \item{selector}{Element selector to apply the waitress to, if \code{NULL} then the waitress is applied to the whole screen.}
@@ -38,7 +38,7 @@ loading bar should be removed.}
 Programatically show and hide loading bars.
 }
 \details{
-You can pipe the methods with \code{$}. 
+You can pipe the methods with \code{$}.
 \code{Waitress$new()} and \code{call_waitress()} are equivalent.
 }
 \examples{
@@ -53,7 +53,7 @@ server <- function(input, output, session){
  
   w <- Waitress$
    new()$  # call a waitress
-  	start() # start waitress
+  	start() # start waitress
 	 
   observeEvent(input$set, {
     w$set(input$set) # set at percentage

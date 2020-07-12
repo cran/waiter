@@ -7,539 +7,618 @@
 #' @param style CSS style to apply to spinner.
 #' @param color Desired color of spinner.
 #'
-#' @details You can browse the spinners with \code{browse_spinners}.
+#' @details Much of the \code{CSS} used is to provide those spinners.
+#' One can greatly reduce the load on the browser by only sourcing
+#' the CSS for the spinners required. You can find out which CSS kits
+#' are required to load by using the spinner in the R console as 
+#' shown in the example. This prints the kit and instructions
+#' to only source the required file.
 #'
-#' @examples if(interactive()) browse_spinners()
+#' @examples spin_rotating_plane()
+#' 
+#' @return An object of class \code{spinner}.
 #' 
 #' @name spinners
 #' @export
 spin_rotating_plane <- function(){
-  div(class = "rotating-plane")
+  construct(div(class = "rotating-plane"), 1)
 }
 
 #' @rdname spinners
 #' @export
 spin_fading_circles <- function(){
-  div(
-    class = "sk-fading-circle",
-    div(class = "sk-circle1 sk-circle"),
-    div(class = "sk-circle2 sk-circle"),
-    div(class = "sk-circle3 sk-circle"),
-    div(class = "sk-circle4 sk-circle"),
-    div(class = "sk-circle5 sk-circle"),
-    div(class = "sk-circle6 sk-circle"),
-    div(class = "sk-circle7 sk-circle"),
-    div(class = "sk-circle8 sk-circle"),
-    div(class = "sk-circle9 sk-circle"),
-    div(class = "sk-circle10 sk-circle"),
-    div(class = "sk-circle11 sk-circle"),
-    div(class = "sk-circle12 sk-circle")
+  construct(
+    div(
+      class = "sk-fading-circle",
+      div(class = "sk-circle1 sk-circle"),
+      div(class = "sk-circle2 sk-circle"),
+      div(class = "sk-circle3 sk-circle"),
+      div(class = "sk-circle4 sk-circle"),
+      div(class = "sk-circle5 sk-circle"),
+      div(class = "sk-circle6 sk-circle"),
+      div(class = "sk-circle7 sk-circle"),
+      div(class = "sk-circle8 sk-circle"),
+      div(class = "sk-circle9 sk-circle"),
+      div(class = "sk-circle10 sk-circle"),
+      div(class = "sk-circle11 sk-circle"),
+      div(class = "sk-circle12 sk-circle")
+    ),
+    1
   )
 }
 
 #' @rdname spinners
 #' @export
 spin_folding_cube <- function(){
-  div(
-    class = "sk-folding-cube",
-    div(class = "sk-cube1 sk-cube"),
-    div(class = "sk-cube2 sk-cube"),
-    div(class = "sk-cube3 sk-cube"),
-    div(class = "sk-cube4 sk-cube")
+  construct(
+    div(
+      class = "sk-folding-cube",
+      div(class = "sk-cube1 sk-cube"),
+      div(class = "sk-cube2 sk-cube"),
+      div(class = "sk-cube3 sk-cube"),
+      div(class = "sk-cube4 sk-cube")
+    ),
+    1
   )
 }
 
 #' @rdname spinners
 #' @export
 spin_double_bounce <- function(){
-  div(
-    class = "double-bouncer",
-    div(class = "double-bounce1"),
-    div(class = "double-bounce2")
+  construct(
+    div(
+      class = "double-bouncer",
+      div(class = "double-bounce1"),
+      div(class = "double-bounce2")
+    ),
+    1
   )
 }
 
 #' @rdname spinners
 #' @export
 spin_wave <- function(){
-  div(
-    class = "waver",
-    div(class = "rect1"),
-    div(class = "rect2"),
-    div(class = "rect3"),
-    div(class = "rect4"),
-    div(class = "rect5")
+  construct(
+    div(
+      class = "waver",
+      div(class = "rect1"),
+      div(class = "rect2"),
+      div(class = "rect3"),
+      div(class = "rect4"),
+      div(class = "rect5")
+    ),
+    1
   )
 }
 
 #' @rdname spinners
 #' @export
 spin_wandering_cubes <- function(){
-  div(
-    class = "wandering-cubes",
-    div(class = "cube1"),
-    div(class = "cube2")
+  construct(
+    div(
+      class = "wandering-cubes",
+      div(class = "cube1"),
+      div(class = "cube2")
+    ),
+    1
   )
 }
 
 #' @rdname spinners
 #' @export
 spin_pulse <- function(){
-  div(class = "pulser")
+  construct(div(class = "pulser"), 1)
 }
 
 #' @rdname spinners
 #' @export
 spin_chasing_dots <- function(){
-  div(
-    class = "chasing-dots",
-    div(class = "dot1"),
-    div(class = "dot2")
+  construct(
+    div(
+      class = "chasing-dots",
+      div(class = "dot1"),
+      div(class = "dot2")
+    ),
+    1
   )
 }
 
 #' @rdname spinners
 #' @export
 spin_three_bounce <- function(){
-  div(
-    class = "three-bounce",
-    div(class = "bounce1"),
-    div(class = "bounce2"),
-    div(class = "bounce3")
-  ) 
+  construct(
+    div(
+      class = "three-bounce",
+      div(class = "bounce1"),
+      div(class = "bounce2"),
+      div(class = "bounce3")
+    ),
+    1
+  )
 }
 
 #' @rdname spinners
 #' @export
 spin_circle <- function(){
-  div(
-    class = "sk-circle",
-    div(class = "sk-circle1 sk-child"),
-    div(class = "sk-circle2 sk-child"),
-    div(class = "sk-circle3 sk-child"),
-    div(class = "sk-circle4 sk-child"),
-    div(class = "sk-circle5 sk-child"),
-    div(class = "sk-circle6 sk-child"),
-    div(class = "sk-circle7 sk-child"),
-    div(class = "sk-circle8 sk-child"),
-    div(class = "sk-circle9 sk-child"),
-    div(class = "sk-circle10 sk-child"),
-    div(class = "sk-circle11 sk-child"),
-    div(class = "sk-circle12 sk-child")
+  construct(
+    div(
+      class = "sk-circle",
+      div(class = "sk-circle1 sk-child"),
+      div(class = "sk-circle2 sk-child"),
+      div(class = "sk-circle3 sk-child"),
+      div(class = "sk-circle4 sk-child"),
+      div(class = "sk-circle5 sk-child"),
+      div(class = "sk-circle6 sk-child"),
+      div(class = "sk-circle7 sk-child"),
+      div(class = "sk-circle8 sk-child"),
+      div(class = "sk-circle9 sk-child"),
+      div(class = "sk-circle10 sk-child"),
+      div(class = "sk-circle11 sk-child"),
+      div(class = "sk-circle12 sk-child")
+    ),
+    1
   )
 }
 
 #' @rdname spinners
 #' @export
 spin_rotate <- function(){
-  div(
-    class = "spinner-box",
+  construct(
     div(
-      class = "circle-border",
-      div(class = "circle-core")
-    )
+      class = "spinner-box",
+      div(
+        class = "circle-border",
+        div(class = "circle-core")
+      )
+    ),
+    1
   )
 }
 
 #' @rdname spinners
 #' @export
 spin_solar <- function(){
-  div(
-    class = "spinner-box",
+  construct(
     div(
-      class = "earth-orbit orbit",
+      class = "spinner-box",
       div(
-        class = "planet earth"
-      ),
-      div(
-        class = "venus-orbit orbit",
+        class = "earth-orbit orbit",
         div(
-          class = "planet venus"
+          class = "planet earth"
         ),
         div(
-          class = "mercury-orbit orbit",
+          class = "venus-orbit orbit",
           div(
-            class = "planet mercury"
+            class = "planet venus"
           ),
-          div(class = "sun")
+          div(
+            class = "mercury-orbit orbit",
+            div(
+              class = "planet mercury"
+            ),
+            div(class = "sun")
+          )
         )
       )
-    )
+    ),
+    1
   )
 }
 
 #' @rdname spinners
 #' @export
 spin_orbit <- function(){
-  div(
-    class = "spinner-box",
-    div(class = "blue-orbit leo"),
-    div(class = "green-orbit leo"),
-    div(class = "red-orbit leo"),
-    div(class = "white-orbit w1 leo"),
-    div(class = "white-orbit w2 leo"),
-    div(class = "white-orbit w3 leo")
+  construct(
+    div(
+      class = "spinner-box",
+      div(class = "blue-orbit leo"),
+      div(class = "green-orbit leo"),
+      div(class = "red-orbit leo"),
+      div(class = "white-orbit w1 leo"),
+      div(class = "white-orbit w2 leo"),
+      div(class = "white-orbit w3 leo")
+    ),
+    1
   )
 }
 
 #' @rdname spinners
 #' @export
 spin_squares <- function(){
-  div(
-    class = "spinner-box",
+  construct(
     div(
-      class = "configure-border-1",
-      div(class = "configure-core")
+      class = "spinner-box",
+      div(
+        class = "configure-border-1",
+        div(class = "configure-core")
+      ),
+      div(
+        class = "configure-border-2",
+        div(class = "configure-core")
+      )
     ),
-    div(
-      class = "configure-border-2",
-      div(class = "configure-core")
-    )
+    1
   )
 }
 
 #' @rdname spinners
 #' @export
 spin_cube_grid <- function(){
-  div(
-    class = "sk-cube-grid",
-    div(class = "sk-cube sk-cube1"),
-    div(class = "sk-cube sk-cube2"),
-    div(class = "sk-cube sk-cube3"),
-    div(class = "sk-cube sk-cube4"),
-    div(class = "sk-cube sk-cube5"),
-    div(class = "sk-cube sk-cube6"),
-    div(class = "sk-cube sk-cube7"),
-    div(class = "sk-cube sk-cube8"),
-    div(class = "sk-cube sk-cube9")
+  construct(
+    div(
+      class = "sk-cube-grid",
+      div(class = "sk-cube sk-cube1"),
+      div(class = "sk-cube sk-cube2"),
+      div(class = "sk-cube sk-cube3"),
+      div(class = "sk-cube sk-cube4"),
+      div(class = "sk-cube sk-cube5"),
+      div(class = "sk-cube sk-cube6"),
+      div(class = "sk-cube sk-cube7"),
+      div(class = "sk-cube sk-cube8"),
+      div(class = "sk-cube sk-cube9")
+    ),
+    1
   )
 }
 
 #' @rdname spinners
 #' @export
 spin_circles <- function(){
-	div(class = "lds-circle")
+	construct(div(class = "lds-circle"), 1)
 }
 
 #' @rdname spinners
 #' @export
 spin_orbiter <- function(){
-	div(
-    class = "orbiter-spinner",
+  construct(
     div(
-      class = "orbiter",
-      class = "orbiter",
-      class = "orbiter"
-    )
+      class = "orbiter-spinner",
+      div(
+        class = "orbiter",
+        class = "orbiter",
+        class = "orbiter"
+      )
+    ),
+    1
   )
 }
 
 #' @rdname spinners
 #' @export
 spin_pixel <- function(){
-	div(class = "pixel-spinner", div(class = "pixel-spinner-inner"))
+	construct(div(class = "pixel-spinner", div(class = "pixel-spinner-inner")), 1)
 }
 
 #' @rdname spinners
 #' @export
 spin_flower <- function(){
-	div(
-    class = "flower-spinner",
+  construct(
     div(
-      class = "dots-container",
+      class = "flower-spinner",
       div(
-        class = "bigger-dot",
+        class = "dots-container",
         div(
-          class = "smaller-dot"
+          class = "bigger-dot",
+          div(
+            class = "smaller-dot"
+          )
         )
       )
-    )
+    ),
+    1
   )
 }
 
 #' @rdname spinners
 #' @export
 spin_dual_ring <- function(){
-	div(class = "lds-dual-ring")
+	construct(div(class = "lds-dual-ring"), 2)
 }
 
 #' @rdname spinners
 #' @export
 spin_heart <- function(){
-	div(
-    class = "lds-heart",
-		div()
-	)
+  construct(div(class = "lds-heart", div()), 2)
 }
 
 #' @rdname spinners
 #' @export
 spin_ellipsis <- function(){
-	div(
-    class = "lds-ellipsis",
-		div(),
-		div(),
-		div(),
-		div()
-	)
+  construct(
+    div(
+      class = "lds-ellipsis",
+      div(),
+      div(),
+      div(),
+      div()
+    ),
+    2
+  )
 }
 
 #' @rdname spinners
 #' @export
 spin_facebook <- function(){
-	div(
-    class = "lds-facebook",
-		div(),
-		div(),
-		div()
-	)
+  construct(
+    div(
+      class = "lds-facebook",
+      div(),
+      div(),
+      div()
+    ),
+    2
+  )
 }
 
 #' @rdname spinners
 #' @export
 spin_hourglass <- function(){
-	div(class = "lds-hourglass")
+	construct(div(class = "lds-hourglass"), 2)
 }
 
 #' @rdname spinners
 #' @export
 spin_ring <- function(){
-	div(
-    class = "lds-ring",
-		div(),
-		div(),
-		div(),
-		div()
-	)
+  construct(
+    div(
+      class = "lds-ring",
+      div(),
+      div(),
+      div(),
+      div()
+    ),
+    2
+  )
 }
 
 #' @rdname spinners
 #' @export
 spin_ripple <- function(){
-	div(
-    class = "lds-ripple",
-		div(),
-		div()
-	)
+  construct(
+    div(
+      class = "lds-ripple",
+      div(),
+      div()
+    ),
+    2
+  )
 }
 
 #' @rdname spinners
 #' @export
 spin_terminal <- function(){
-  div(class = "waiter-terminal")
+  construct(div(class = "waiter-terminal"), 2)
 }
 
 #' @rdname spinners
 #' @export
 spin_loader <- function(){
-  div(class = "spinner-loader")
+  construct(div(class = "spinner-loader"), 4)
 }
 
 #' @rdname spinners
 #' @export
 spin_throbber <- function(){
-  div(class = "throbber-loader")
+  construct(div(class = "throbber-loader"), 4)
 }
 
 #' @rdname spinners
 #' @export
 spin_refresh <- function(){
-  div(class = "refreshing-loader")
+  construct(div(class = "refreshing-loader"), 4)
 }
 
 #' @rdname spinners
 #' @export
 spin_heartbeat <- function(){
-  div(class = "heartbeat-loader")
+  construct(div(class = "heartbeat-loader"), 4)
 }
 
 #' @rdname spinners
 #' @export
 spin_gauge <- function(){
-  div(class = "gauge-loader")
+  construct(div(class = "gauge-loader"), 4)
 }
 
 #' @rdname spinners
 #' @export
 spin_3k <- function(){
-  div(class = "three-quarters-loader")
+  construct(div(class = "three-quarters-loader"), 4)
 }
 
 #' @rdname spinners
 #' @export
 spin_wobblebar <- function(){
-  div(class = "wobblebar-loader")
+  construct(div(class = "wobblebar-loader"), 4)
 }
 
 #' @rdname spinners
 #' @export
 spin_atebits <- function(){
-  div(class = "atebits-loader")
+  construct(div(class = "atebits-loader"), 4)
 }
 
 #' @rdname spinners
 #' @export
 spin_whirly <- function(){
-  div(class = "whirly-loader")
+  construct(div(class = "whirly-loader"), 4)
 }
 
 #' @rdname spinners
 #' @export
 spin_flowers <- function(){
-  div(class = "flower-loader")
+  construct(div(class = "flower-loader"), 4)
 }
 
 #' @rdname spinners
 #' @export
 spin_dots <- function(){
-  div(class = "dots-loader")
+  construct(div(class = "dots-loader"), 4)
 }
 
 #' @rdname spinners
 #' @export
 spin_3circles <- function(){
-  div(class = "circles-loader")
+  construct(div(class = "circles-loader"), 4)
 }
 
 #' @rdname spinners
 #' @export
 spin_plus <- function(){
-  div(class = "plus-loader")
+  construct(div(class = "plus-loader"), 4)
 }
 
 #' @rdname spinners
 #' @export
 spin_pulsar <- function(){
-  div(class = "pulse-loader")
+  construct(div(class = "pulse-loader"), 4)
 }
 
 #' @rdname spinners
 #' @export
 spin_hexdots <- function(){
-  div(class = "hexdots-loader")
+  construct(div(class = "hexdots-loader"), 4)
 }
 
 #' @rdname spinners
 #' @export
 spin_inner_circles <- function(){
-  div(class = "inner-circles-loader")
+  construct(div(class = "inner-circles-loader"), 4)
 }
 
 #' @rdname spinners
 #' @export
 spin_pong <- function(){
-  div(class = "pong-loader")
+  construct(div(class = "pong-loader"), 4)
 }
 
 #' @rdname spinners
 #' @export
 spin_timer <- function(){
-  div(class = "timer-loader")
+  construct(div(class = "timer-loader"), 4)
 }
 
 #' @rdname spinners
 #' @export
 spin_ball <- function(){
-  div(class = "ball-loader")
+  construct(div(class = "ball-loader"), 4)
 }
 
 #' @rdname spinners
 #' @export
 spin_dual_circle <- function(){
-  div(class = "sbl-circ-dual")
+  construct(div(class = "sbl-circ-dual"), 5)
 }
 
 #' @rdname spinners
 #' @export
 spin_seven_circle <- function(){
-  div(
-    class = "sbl-seven-circles",
-    div(),
-    div(),
-    div(),
-    div(),
-    div(),
-    div(),
-    div()
+  construct(
+    div(
+      class = "sbl-seven-circles",
+      div(),
+      div(),
+      div(),
+      div(),
+      div(),
+      div(),
+      div()
+    ),
+    5
   )
 }
 
 #' @rdname spinners
 #' @export
 spin_clock <- function(){
-  div(class = "sbl-meter")
+  construct(div(class = "sbl-meter"), 5)
 }
 
 #' @rdname spinners
 #' @export
 spin_pushing_shapes <- function(){
-  div(
-    class = "sbl-pushing-shapes",
-    div(),
-    div()
+  construct(
+    div(
+      class = "sbl-pushing-shapes",
+      div(),
+      div()
+    ),
+    5
   )
 }
 
 #' @rdname spinners
 #' @export
 spin_fill <- function(){
-  div(class = "sbl-rect-spin-fill")
+  construct(div(class = "sbl-rect-spin-fill"), 5)
 }
 
 #' @rdname spinners
 #' @export
 spin_rhombus <- function(){
-  div(class = "sbl-cirle-to-rhombus")
+  construct(div(class = "sbl-cirle-to-rhombus"), 5)
 }
 
 #' @rdname spinners
 #' @export
 spin_balance <- function(){
-  div(class = "sbl-cirle-balance")
+  construct(div(class = "sbl-cirle-balance"), 5)
 }
 
 #' @rdname spinners
 #' @export
 spin_square_circle <- function(){
-  div(
-    class = "sbl-cirle-and-square",
-    div(),
-    div(),
-    div(),
-    div()
+  construct(
+    div(
+      class = "sbl-cirle-and-square",
+      div(),
+      div(),
+      div(),
+      div()
+    ),
+    5
   )
 }
 
 #' @rdname spinners
 #' @export
 spin_circle_square <- function(){
-  div(
-    class = "sbl-square-to-circle",
-    div(),
-    div(),
-    div()
+  construct(
+    div(
+      class = "sbl-square-to-circle",
+      div(),
+      div(),
+      div()
+    ),
+    5
   )
 }
 
 #' @rdname spinners
 #' @export
 spin_puzzle <- function(){
-  div(
-    class = "sbl-puzzle",
-    div(),
-    div(),
-    div(),
-    div(),
-    div()
+  construct(
+    div(
+      class = "sbl-puzzle",
+      div(),
+      div(),
+      div(),
+      div(),
+      div()
+    ),
+    5
   )
 }
 
 #' @rdname spinners
 #' @export
 spin_half <- function(){
-  div(
-    class = "sbl-half-circle-spin",
-    div()
+  construct(
+    div(
+      class = "sbl-half-circle-spin",
+      div()
+    ),
+    5
   )
 }
 
@@ -557,91 +636,115 @@ spin_loaders <- function(id = 1, color = "white", style = NULL){
   else
     style <- color
   
-  div(class = paste0("loaderz-", id), style = style)
+  construct(div(class = paste0("loaderz-", id), style = style), 6)
 }
 
 #' @rdname spinners
 #' @export
 spin_1 <- function(){
-  div(
-    class = "container--box",
+  construct(
     div(
-      class = "box",
+      class = "container--box",
       div(
-        class = "spinner spinner--1"
+        class = "boxxy",
+        div(
+          class = "spinner spinner--1"
+        )
       )
-    )
+    ),
+    3
   )
 }
 
 #' @rdname spinners
 #' @export
 spin_2 <- function(){
-  div(
-    class = "container--box",
+  construct(
     div(
-      class = "box",
+      class = "container--box",
       div(
-        class = "spinner spinner--2"
+        class = "boxxy",
+        div(
+          class = "spinner spinner--2"
+        )
       )
-    )
+    ),
+    3
   )
 }
 
 #' @rdname spinners
 #' @export
 spin_3 <- function(){
-  div(
-    class = "container--box",
+  construct(
     div(
-      class = "box",
+      class = "container--box",
       div(
-        class = "spinner spinner--3"
+        class = "boxxy",
+        div(
+          class = "spinner spinner--3"
+        )
       )
-    )
+    ),
+    3
   )
 }
 
 #' @rdname spinners
 #' @export
 spin_4 <- function(){
-  div(
-    class = "container--box",
+  construct(
     div(
-      class = "box",
+      class = "container--box",
       div(
-        class = "spinner spinner--4"
+        class = "boxxy",
+        div(
+          class = "spinner spinner--4"
+        )
       )
-    )
+    ),
+    3
   )
 }
 
 #' @rdname spinners
 #' @export
 spin_5 <- function(){
-  div(
-    class = "container--box",
+  construct(
     div(
-      class = "box",
+      class = "container--box",
       div(
-        class = "spinner spinner--5"
+        class = "boxxy",
+        div(
+          class = "spinner spinner--5"
+        )
       )
-    )
+    ),
+    3
   )
 }
 
 #' @rdname spinners
 #' @export
 spin_6 <- function(){
-  div(
-    class = "container--box",
+  construct(
     div(
-      class = "box",
+      class = "container--box",
       div(
-        class = "spinner spinner--6"
+        class = "boxxy",
+        div(
+          class = "spinner spinner--6"
+        )
       )
-    )
+    ),
+    3
   )
+}
+
+#' @rdname spinners
+#' @export
+spin_google <- function(){
+  construct(div(class = "cm-spinner"), 7)
 }
 
 #' @rdname spinners
@@ -649,5 +752,108 @@ spin_6 <- function(){
 browse_waiters <- function() {
   .Deprecated("", package = "waiter", msg = "This function is no longer supported; see the package website.")
 	#shiny::runApp(appDir = system.file("waiter", package = 'waiter', mustWork = TRUE))
+  construct()
+}
+
+#' Preview spinner
+#' 
+#' Allows previewing spinners in web browser or RStudio Viewer.
+#' 
+#' @param spinner A waiter \code{link{spinner}}.
+#' @param bg_color Background color.
+#' 
+#' @examples 
+#' if(interactive()) preview_spinner(spin_1())
+#' 
+#' @export
+preview_spinner <- function(spinner, bg_color = "black") UseMethod("preview_spinner")
+
+#'@export
+preview_spinner.spinner <- function(spinner, bg_color = "black"){
+
+  if(missing(spinner))
+    stop("Missing spinner", call. = FALSE)
+
+  deps <- get_spinner_dependencies()
+  spinner <- htmltools::attachDependencies(spinner, deps)
+
+  htmltools::browsable(
+    tagList(
+      tags$head(
+        tags$style(
+          paste0("body{background: ", bg_color,";}")
+        )
+      ),
+      div(
+        style = "position: relative;height:90vh;",
+        div(
+          style = "position: absolute;top:50%;left:50%;",
+          spinner
+        )
+      )
+    )
+  )
+
+}
+
+#' Get Dependencies
+#' 
+#' Get dependencies for preview.
+#' 
+#' @keywords internal
+get_spinner_dependencies <- function(){
+  htmltools::htmlDependency(
+    name = "css-spinner",
+    version = "1.0.0",
+    src = "assets/waiter",
+    package = "waiter",
+    stylesheet = c(
+      "css-spinners.css",
+      "devloop.css",
+      "please-wait.css",
+      "spinbolt.css",
+      "spinkit.css",
+      "spinners.css"
+    ),
+    all_files = TRUE
+  )
+}
+
+#' Spinner Constructor
+#' 
+#' Construct spinner class.
+#' 
+#' @param spinner Spinner object.
+#' @param id Id of spinkit to use.
+#' 
+#' @keywords internal
+construct <- function(spinner, id){
+  # hold spinner and id
+  attr(spinner, "id") <- id
+  structure(spinner, class = c("spinner", class(spinner)))
+}
+
+#' @export
+print.spinner <- function(x, ...){
+  kit(x)
+}
+
+#' Get Spinner kit id
+#' 
+#' Prints id of spinner CSS required.
+#' 
+#' @param spinner Spinner to print kit of.
+#' 
+#' @keywords internal
+kit <- function(spinner){
+  id <- attr(spinner, 'id')
+
+  cat(
+    "This spinner requires kit #",
+    crayon::cyan(id), ", include it with:\n", 
+    crayon::green("use_waiter(spinners = ", id, ")", sep = ""), " \n",
+    sep = ""
+  )
+
   invisible()
 }

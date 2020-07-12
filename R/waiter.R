@@ -10,8 +10,14 @@
 #' when the plot in \code{id} is drawn. Note the latter will only work with
 #' shiny plots, tables, htmlwidgets, etc. but will not work with arbitrary
 #' elements.
-#' @param include_js Whether to include the Javascript dependencies, only
-#' set to \code{FALSE} if you use \code{\link{show_waiter_on_load}}.
+#' @param spinners Spinners to include. By default all the CSS files for 
+#' all spinners are included you can customise this only that which you 
+#' need in order to reduce the amount of CSS that needs to be loaded and
+#' improve page loading speed. There are 7 spinner kits. The spinner kit
+#' required for the spinner you use is printed in the R console when 
+#' using the spinner. You can specify a single spinner kit e.g.: \code{1}
+#' or multiple spinner kits as a vector e.g.: \code{c(1,3,6)}.
+#' @param include_js Deprecated argument, no longer needed.
 #' 
 #' @section Functions:
 #' \itemize{
@@ -19,6 +25,7 @@
 #'  \item{\code{waiter_show_on_load}: Show a waiter on page load, before the session is even loaded, include in UI \emph{after} \code{use_waiter}.}
 #'  \item{\code{waiter_show}: Show waiting screen.}
 #'  \item{\code{waiter_hide}: Hide any waiting screen.}
+#'  \item{\code{waiter_on_busy}: Automatically shows the waiting screen when the server is busy, and hides it when it goes back to idle.}
 #'  \item{\code{waiter_update}: Update the content \code{html} of the waiting screen.}
 #'  \item{\code{waiter_hide_on_render}: Hide any waiting screen when the output is drawn, useful for outputs that take a long time to draw, \emph{use in \code{ui}}.}
 #' }
@@ -28,16 +35,16 @@
 #' 
 #' ui <- fluidPage(
 #'   use_waiter(), # dependencies
-#'   waiter_show_on_load(spin_fading_circles()), # shows before anything else 
+#'   waiter_show_on_load(spin_fading_circles()), # shows before anything else 
 #'   actionButton("show", "Show loading for 5 seconds")
 #' )
 #' 
 #' server <- function(input, output, session){
-#'   waiter_hide() # will hide *on_load waiter
+#'   waiter_hide() # will hide *on_load waiter
 #'   
 #'   observeEvent(input$show, {
 #'     waiter_show(
-#'       tagList(
+#'       html = tagList(
 #'         spin_fading_circles(),
 #'         "Loading ..."
 #'       )
@@ -52,57 +59,109 @@
 #' @import shiny
 #' @name waiter
 #' @export
-use_waiter <- function(include_js = TRUE){
-  singleton(
-    tags$head(
-      tags$link(
-        href = "waiter-assets/waiter/please-wait.css",
-        rel="stylesheet",
-        type="text/css"
-      ),
-      tags$script("window.loading_screen;"),
+use_waiter <- function(spinners = 1:7, include_js = TRUE){
+
+  if(!isTRUE(include_js))
+    warning("include_js argument is deprecated, it is no longer needed")
+
+  # must haves
+  header <- tags$head(
+    tags$link(
+      href = "waiter-assets/waiter/please-wait.css",
+      rel="stylesheet",
+      type="text/css"
+    ),
+    tags$script("window.loading_screen;")
+  )
+
+  # spinner kits
+  if(1 %in% spinners)
+    header <- shiny::tagAppendChildren(
+      header,
       tags$link(
         href = "waiter-assets/waiter/spinkit.css",
         rel="stylesheet",
         type="text/css"
-      ),
+      )
+    )
+
+  if(2 %in% spinners)
+    header <- shiny::tagAppendChildren(
+      header,
       tags$link(
         href = "waiter-assets/waiter/css-spinners.css",
         rel="stylesheet",
         type="text/css"
-      ),
+      )
+    )
+
+  if(3 %in% spinners)
+    header <- shiny::tagAppendChildren(
+      header,
       tags$link(
         href = "waiter-assets/waiter/devloop.css",
         rel="stylesheet",
         type="text/css"
-      ),
+      )
+    )
+
+  if(4 %in% spinners)
+    header <- shiny::tagAppendChildren(
+      header,
       tags$link(
         href = "waiter-assets/waiter/spinners.css",
         rel="stylesheet",
         type="text/css"
-      ),
+      )
+    )
+
+  if(5 %in% spinners)
+    header <- shiny::tagAppendChildren(
+      header,
       tags$link(
         href = "waiter-assets/waiter/spinbolt.css",
         rel="stylesheet",
         type="text/css"
-      ),
+      )
+    )
+
+  if(6 %in% spinners)
+    header <- shiny::tagAppendChildren(
+      header,
       tags$link(
         href = "waiter-assets/waiter/loaders.css",
         rel="stylesheet",
         type="text/css"
-      ),
-      if(include_js)
-        tags$script(
-          src = "waiter-assets/waiter/please-wait.min.js"
-        ),
-      tags$script(
-        src = "waiter-assets/waiter/waiter.js"
-      ),
-      tags$script(
-        src = "waiter-assets/waiter/custom.js"
       )
     )
+
+  if(7 %in% spinners)
+    header <- shiny::tagAppendChildren(
+      header,
+      tags$link(
+        href = "waiter-assets/waiter/custom.css",
+        rel="stylesheet",
+        type="text/css"
+      )
+    )
+
+  # add js
+  header <- shiny::tagAppendChildren(
+    header,
+    tags$script(
+      src = "waiter-assets/waiter/please-wait.min.js"
+    ),
+    tags$script(
+      src = "waiter-assets/waiter/waiter.js"
+    ),
+    tags$script(
+      src = "waiter-assets/waiter/custom.js"
+    )
   )
+
+  # singleton it
+  singleton(header)
+
 }
 
 #' @rdname waiter
@@ -195,12 +254,7 @@ waiter_show_on_load <- function(html = spin_1(), color = "#333e48", logo = ""){
     });"
   )
 
-  tagList(
-    tags$script(
-      src = "waiter-assets/waiter/please-wait.min.js"
-    ),
-    HTML(paste0("<script>", script, "</script>"))
-  )
+  HTML(paste0("<script>", script, "</script>"))
 }
 
 #' @rdname waiter
@@ -245,6 +299,30 @@ waiter_hide_on_render <- function(id){
       tags$script(script)
     )
   )
+}
+
+#' @rdname waiter
+#' @export
+waiter_on_busy <- function(html = spin_1(), color = "#333e48", logo = ""){
+
+  html <- as.character(html)
+  html <- gsub("\n", "", html)
+  
+  script <- paste0(
+    "$(document).on('shiny:busy', function(event) {
+      window.loading_screen = pleaseWait({
+        logo: '", as.character(logo), "',
+        backgroundColor: '", color, "',
+        loadingHtml: '", html, "'
+      });
+    });
+    
+    $(document).on('shiny:idle', function(event) {
+      window.loading_screen.finish();
+    });"
+  )
+
+  singleton(HTML(paste0("<script>", script, "</script>")))
 }
 
 #' @rdname waiter
@@ -325,9 +403,15 @@ Waiter <- R6::R6Class(
 #' 
 #' @examples
 #' \dontrun{Waiter$new()}
-    initialize = function(id = NULL, html = spin_1(), color = "#333e48", logo = "", 
+    initialize = function(id = NULL, html = NULL, color = NULL, logo = NULL, 
       hide_on_render = !is.null(id)){
+
+      # get theme
+      html <- .theme_or_value(html, "WAITER_HTML")
+      color <- .theme_or_value(color, "WAITER_COLOR")
+      logo <- .theme_or_value(logo, "WAITER_LOGO")
       
+      # process inputs
       if(inherits(html, "shiny.tag.list") || inherits(html, "shiny.tag"))
         html <- list(html)
       
@@ -422,3 +506,59 @@ Waiter <- R6::R6Class(
 		}
   )
 )
+
+#' Define a Theme
+#' 
+#' Define a theme to be used by all waiter loading screens. 
+#' These can be overriden in individual loading screens.
+#' 
+#' @inheritParams waiter
+#' 
+#' @name waiterTheme
+#' @export
+waiter_set_theme <- function(html = spin_1(), color = "#333e48", logo = ""){
+  options(
+    WAITER_HTML = html,
+    WAITER_COLOR = color,
+    WAITER_LOGO = logo
+  )
+  invisible()
+}
+
+#' @rdname waiterTheme
+#' @export
+waiter_get_theme <- function(){
+  list(
+    html = .get_html(),
+    color = .get_color(),
+    logo = .get_logo()
+  )
+}
+
+#' @rdname waiterTheme
+#' @export
+waiter_unset_theme <- function(){
+  options(
+    WAITER_HTML = NULL,
+    WAITER_COLOR = NULL,
+    WAITER_LOGO = NULL
+  )
+  invisible()
+}
+
+#' Transparency 
+#' 
+#' A convenience function to create a waiter with transparent background.
+#' 
+#' @param alpha Alpha channel where \code{0} is completely transparent
+#' and \code{1} is opaque.
+#' 
+#' @examples transparent()
+#' 
+#' @export
+transparent <- function(alpha = 0){
+  correct <- alpha >= 0 & alpha <= 1
+  if(!correct)
+    stop("`alpha` must be between 0 and 1", call. = FALSE)
+  paste0("rgba(255,255,255,", alpha, ")")
+}

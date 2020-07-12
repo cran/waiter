@@ -10,15 +10,16 @@
 \alias{waiter_show_on_load}
 \alias{hide_waiter_on_drawn}
 \alias{waiter_hide_on_render}
+\alias{waiter_on_busy}
 \alias{hide_waiter}
 \alias{waiter_hide}
 \alias{update_waiter}
 \alias{waiter_update}
 \title{Waiter}
 \usage{
-use_waiter(include_js = TRUE)
+use_waiter(spinners = 1:7, include_js = TRUE)
 
-waiter_use(include_js = TRUE)
+waiter_use(spinners = 1:7, include_js = TRUE)
 
 show_waiter(
   html = "",
@@ -44,6 +45,8 @@ hide_waiter_on_drawn(id)
 
 waiter_hide_on_render(id)
 
+waiter_on_busy(html = spin_1(), color = "#333e48", logo = "")
+
 hide_waiter(id = NULL)
 
 waiter_hide(id = NULL)
@@ -53,8 +56,15 @@ update_waiter(html = "", id = NULL)
 waiter_update(id = NULL, html = NULL)
 }
 \arguments{
-\item{include_js}{Whether to include the Javascript dependencies, only
-set to \code{FALSE} if you use \code{\link{show_waiter_on_load}}.}
+\item{spinners}{Spinners to include. By default all the CSS files for
+all spinners are included you can customise this only that which you
+need in order to reduce the amount of CSS that needs to be loaded and
+improve page loading speed. There are 7 spinner kits. The spinner kit
+required for the spinner you use is printed in the R console when
+using the spinner. You can specify a single spinner kit e.g.: \code{1}
+or multiple spinner kits as a vector e.g.: \code{c(1,3,6)}.}
+
+\item{include_js}{Deprecated argument, no longer needed.}
 
 \item{html}{HTML content of waiter, generally a spinner, see \code{\link{spinners}}.}
 
@@ -75,12 +85,13 @@ Programatically show and hide loading screens.
 \section{Functions}{
 
 \itemize{
- \item{\code{use_waiter} and \code{waiter_use}: waiter dependencies to include anywhere in your UI but ideally at the top.}
- \item{\code{waiter_show_on_load}: Show a waiter on page load, before the session is even loaded, include in UI \emph{after} \code{use_waiter}.}
- \item{\code{waiter_show}: Show waiting screen.}
- \item{\code{waiter_hide}: Hide any waiting screen.}
- \item{\code{waiter_update}: Update the content \code{html} of the waiting screen.}
- \item{\code{waiter_hide_on_render}: Hide any waiting screen when the output is drawn, useful for outputs that take a long time to draw, \emph{use in \code{ui}}.}
+\item{\code{use_waiter} and \code{waiter_use}: waiter dependencies to include anywhere in your UI but ideally at the top.}
+\item{\code{waiter_show_on_load}: Show a waiter on page load, before the session is even loaded, include in UI \emph{after} \code{use_waiter}.}
+\item{\code{waiter_show}: Show waiting screen.}
+\item{\code{waiter_hide}: Hide any waiting screen.}
+\item{\code{waiter_on_busy}: Automatically shows the waiting screen when the server is busy, and hides it when it goes back to idle.}
+\item{\code{waiter_update}: Update the content \code{html} of the waiting screen.}
+\item{\code{waiter_hide_on_render}: Hide any waiting screen when the output is drawn, useful for outputs that take a long time to draw, \emph{use in \code{ui}}.}
 }
 }
 
@@ -89,16 +100,16 @@ library(shiny)
 
 ui <- fluidPage(
   use_waiter(), # dependencies
-  waiter_show_on_load(spin_fading_circles()), # shows before anything else 
+  waiter_show_on_load(spin_fading_circles()), # shows before anything else 
   actionButton("show", "Show loading for 5 seconds")
 )
 
 server <- function(input, output, session){
-  waiter_hide() # will hide *on_load waiter
+  waiter_hide() # will hide *on_load waiter
   
   observeEvent(input$show, {
     waiter_show(
-      tagList(
+      html = tagList(
         spin_fading_circles(),
         "Loading ..."
       )
