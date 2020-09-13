@@ -1,7 +1,7 @@
-d13a671e4c5ab7e87b0331d547e587c7 *DESCRIPTION
+cb939b086edce08803fa458ca1003c9a *DESCRIPTION
 6b47b4e14ef885174c7d1e9cf5aed6a5 *LICENSE
 367ed722aff61158061e1ad4612b79b2 *NAMESPACE
-14a18f7b98e8b00521e3b9eaea64a8e4 *NEWS.md
+c7d609ea1ef72a803417e4dbca106b57 *NEWS.md
 e4082e4a0a9ceec9aee40661a2e49aba *R/butler.R
 b32a31b89833983a8452f4e255129dc2 *R/garcon.R
 fbb3c7c9a390f116a98131cf5b87e835 *R/hostess.R
@@ -10,7 +10,7 @@ fbb3c7c9a390f116a98131cf5b87e835 *R/hostess.R
 de2777a2a31148b66afffea7ad181215 *R/steward.R
 f88fde5745ed8b6d97943c9bfee1a53d *R/utils-pipe.R
 e948fb921700952ddea8d370a4634891 *R/utils.R
-e51d16c31d9634b1b1d6933164f8675c *R/waiter.R
+62e8a3d7ee2115d3c01bff7f04abcb57 *R/waiter.R
 e544e20da39f0d3748316fc5a2478f8a *R/waitress.R
 fb340fb402f691dd88999b6dec9f8120 *R/zzz.R
 897301c8f6a58ed1c0d26f463f99f832 *README.md
@@ -25,7 +25,7 @@ c9df65c05bed0eeb5b4968e5ba91ad60 *inst/assets/hostess/loading-bar.min.css
 9fe764813355f11afa93eb190b0fd1ee *inst/assets/hostess/loading-bar.min.js
 ed4932158f2020121cab994c79c9a6dd *inst/assets/waiter/css-spinners.css
 376e965f4df4273f1755bdb59e41c934 *inst/assets/waiter/custom.css
-3c980a780701b35d0641ba891c90eba7 *inst/assets/waiter/custom.js
+790533076cc77d18b6a71a9a4dc9a3af *inst/assets/waiter/custom.js
 5767b7fdbd2489902776617266827876 *inst/assets/waiter/devloop.css
 401d2eaf54cb894cc87ff2a4bbeefdf8 *inst/assets/waiter/loaders.css
 5085cfe2aca98da48e0434b5e996bf45 *inst/assets/waiter/please-wait.css
@@ -33,7 +33,7 @@ ed4932158f2020121cab994c79c9a6dd *inst/assets/waiter/css-spinners.css
 a6d86f461a250b9fdc3610403681d002 *inst/assets/waiter/spinbolt.css
 44187c745313a075a53047139ea25bae *inst/assets/waiter/spinkit.css
 a1f41f50cb46f393012884348c38cd55 *inst/assets/waiter/spinners.css
-07893d5a2168769d760dae021016acbb *inst/assets/waiter/waiter.js
+8b2eeaeee17210d87444517ccf03888e *inst/assets/waiter/waiter.js
 821e4efe35d39620a2d4a292e5272ed0 *inst/assets/waitress/custom.js
 b8c5fefda0687e62d0f106fa8d0b775f *inst/assets/waitress/overlay.css
 d01d6b24b498b7f82c966fa4c64cbd15 *inst/assets/waitress/progress.min.css
@@ -65,7 +65,7 @@ eb03d8842b913874a48088c67eaf6742 *man/hostessLoader.Rd
 2fa0f263544984a64343ce760ebecb6d *man/transparent.Rd
 f2affe0a5209207dc235d0db7c4f3845 *man/use_steward.Rd
 0de4bd78e205cb3656afa9588f8b1b88 *man/waiter.Rd
-866f39304b03476088681750f19d8e77 *man/waiterClass.Rd
+6f663835c865c96e76ac3718a28c9996 *man/waiterClass.Rd
 72b89e3d8f6f452b8cbf8ac02df29512 *man/waiterOptionInternal.Rd
 fc9ebae694bbbdc0cb4cfcce7782f264 *man/waiterTheme.Rd
 b455a1e63b02bad629cf9ffa03815595 *man/waitress.Rd
