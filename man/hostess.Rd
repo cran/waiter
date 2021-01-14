@@ -3,21 +3,10 @@
 \name{hostess}
 \alias{hostess}
 \alias{use_hostess}
-\alias{hostess_init}
-\alias{hostess_set}
 \alias{Hostess}
 \title{Hostess}
 \usage{
 use_hostess()
-
-hostess_init(id = "hostess")
-
-hostess_set(id = "hostess", value)
-}
-\arguments{
-\item{id}{Id of hostess (valid CSS).}
-
-\item{value}{Value to set, between \code{0} and \code{100}.}
 }
 \description{
 Add hostess dependencies.
@@ -41,6 +30,12 @@ Add hostess dependencies.
 ## ------------------------------------------------
 
 \dontrun{Hostess$new()$inc(10)}
+
+## ------------------------------------------------
+## Method `Hostess$close`
+## ------------------------------------------------
+
+\dontrun{Waitress$new("#plot")$close()}
 
 ## ------------------------------------------------
 ## Method `Hostess$get_loader`
@@ -71,6 +66,7 @@ Hostess$new()$set_loader(loader)
 \item \href{#method-print}{\code{Hostess$print()}}
 \item \href{#method-set}{\code{Hostess$set()}}
 \item \href{#method-inc}{\code{Hostess$inc()}}
+\item \href{#method-close}{\code{Hostess$close()}}
 \item \href{#method-get_loader}{\code{Hostess$get_loader()}}
 \item \href{#method-set_loader}{\code{Hostess$set_loader()}}
 \item \href{#method-notify}{\code{Hostess$notify()}}
@@ -82,7 +78,7 @@ Hostess$new()$set_loader(loader)
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Hostess$new(id = NULL, min = 0, max = 100, n = 1)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Hostess$new(id = NULL, min = 0, max = 100, n = 1, infinite = FALSE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -95,6 +91,10 @@ the \code{loader} method you may leave this \code{NULL}.}
 points of the progress bar.}
 
 \item{\code{n}}{Number of loaders to generate.}
+
+\item{\code{infinite}}{Set to \code{TRUE} to create a never ending loading bar, ideal
+when you cannot compute increments or assess the time it might take before the
+loading bar should be removed.}
 }
 \if{html}{\out{</div>}}
 }
@@ -194,6 +194,27 @@ Increase the hostess loading bar.
 
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-close"></a>}}
+\if{latex}{\out{\hypertarget{method-close}{}}}
+\subsection{Method \code{close()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Hostess$close()}\if{html}{\out{</div>}}
+}
+
+\subsection{Details}{
+Close the hostess
+}
+
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{\dontrun{Waitress$new("#plot")$close()}
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-get_loader"></a>}}
 \if{latex}{\out{\hypertarget{method-get_loader}{}}}
 \subsection{Method \code{get_loader()}}{
@@ -248,10 +269,6 @@ Wether \code{fill_color} or \code{stroke_color} is used depends on
 
 \item{\code{...}}{Any other other advanced options to pass to the loaded
 see the \href{https://loading.io/progress/}{official documentation}.}
-
-\item{\code{value}}{Value to set, between \code{0} and \code{100}.}
-
-\item{\code{with_waiter}}{Deprecate in favour of \code{center_page}.}
 }
 \if{html}{\out{</div>}}
 }
