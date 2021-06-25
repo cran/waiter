@@ -27,7 +27,7 @@ var waiter_to_hide_on_error = [];
 var waiter_to_hide_on_silent_error = [];
 
 // show waiter overlay
-function show_waiter(id, html, color, to_hide, hide_on_error, hide_on_silent_error){
+function show_waiter(id, html, color, to_hide, hide_on_error, hide_on_silent_error, image){
   // declare
   var dom,
       selector = 'body',
@@ -60,7 +60,7 @@ function show_waiter(id, html, color, to_hide, hide_on_error, hide_on_silent_err
 
   if(id === null){
     el.height = window.innerHeight;
-    el.width = window.innerWidth;
+    el.width = $("body").width();
   }
   
   // force static if position relative
@@ -100,8 +100,13 @@ function show_waiter(id, html, color, to_hide, hide_on_error, hide_on_silent_err
   overlay.style.zIndex = 9999;
   overlay.classList.add("waiter-overlay");
 
+  if(image != null && image != ''){
+    overlay.style.backgroundImage = "url('" + image + "')";
+  }
+
   if(id === null) {
     overlay.classList.add("waiter-fullscreen");
+    bindEvents();
   } else {
     overlay.classList.add("waiter-local");
   }
@@ -139,6 +144,7 @@ function hide_waiter(id){
     setTimeout(function(){
       try {
         dom.removeChild(overlay[0]);
+        hide_recalculate(id);
       } catch {
         console.log("error removing waiter from", id)
       } finally {
@@ -178,27 +184,32 @@ function hide_recalculate(id){
       head = document.head || document.getElementsByTagName('head')[0],
       style = document.createElement('style');
 
-  style.type = 'text/css';
+  style.id = id + "-waiter-recalculating";
   if (style.styleSheet){
     style.styleSheet.cssText = css;
   } else {
     style.appendChild(document.createTextNode(css));
   }
+
   head.appendChild(style);
+}
+
+function show_recalculate(id){
+  $(id + "-waiter-recalculating").remove();
 }
 
 // remove when output receives value
 $(document).on('shiny:value', function(event) {
-  if(waiter_to_hide.indexOf(event.name) > 0){
+  if(waiter_to_hide.indexOf(event.name) >= 0){
     hide_waiter(event.name);
   }
 });
 
 // remove when output errors
 $(document).on('shiny:error', function(event) {
-  if(event.error.type == null && waiter_to_hide_on_error.indexOf(event.name) > 0){
+  if(event.error.type == null && waiter_to_hide_on_error.indexOf(event.name) >= 0){
     hide_waiter(event.name);
-  } else if (event.error.type != null && waiter_to_hide_on_silent_error.indexOf(event.name) > 0){
+  } else if (event.error.type != null && waiter_to_hide_on_silent_error.indexOf(event.name) >= 0){
     hide_waiter(event.name);
   }
 });
@@ -219,3 +230,14 @@ window.addEventListener("resize", function(){
     waiter.style.height = window.innerHeight + 'px';
   }
 });
+
+function bindEvents(){
+  document.onscroll = function(){
+    let waiter = document.getElementsByClassName("waiter-fullscreen");
+
+    if(waiter === undefined)
+      return;
+     
+    waiter[0].scrollIntoView();
+  }
+}

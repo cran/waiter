@@ -1,7 +1,7 @@
 Package: waiter
 Title: Loading Screen for 'Shiny'
-Version: 0.2.1
-Date: 2021-05-02
+Version: 0.2.2
+Date: 2021-06-25
 Authors@R: c(
     person(given = "John",
            family = "Coene",
@@ -27,10 +27,10 @@ RoxygenNote: 7.1.1
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2021-05-05 16:05:01 UTC; jp
+Packaged: 2021-06-25 12:39:52 UTC; jp
 Author: John Coene [aut, cre],
   Jinhwan Kim [ctb],
   Victor Granda [ctb] (<https://orcid.org/0000-0002-0469-1991>)
 Maintainer: John Coene <jcoenep@gmail.com>
 Repository: CRAN
-Date/Publication: 2021-05-05 18:10:02 UTC
+Date/Publication: 2021-06-25 13:50:02 UTC
