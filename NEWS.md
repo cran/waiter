@@ -1,10 +1,29 @@
+# waiter 0.2.3
+
+- Fix [#95](https://github.com/JohnCoene/waiter/issues/95) with different CSS for full screen (`position: fixed`).
+- Fix CSS injection that repeatedly injected CSS to hide recalculating effect.
+- Remove magrittr in favour of R native pipe.
+- Add active bindings for many of the waiter components,
+see `?Waiter`.
+- Prep deprecation of functions with underscores in favour of camel case
+(only for that which are to be used in the shiny UI).
+- Deprecate the `logo` argument it is no longer used and can be
+easily achieved in other ways.
+- Add `triggerWaiter` to trigger the waiter without going through
+the server.
+- Implement webpack for waiter, minifies and optimises code.
+- Deprecate `spinners` argument of `use_waiter` function. All CSS is bundled with webpack.
+- Performance improvements with use of maps instead of arrays.
+- Improve documentation, new site.
+- Added function `autoWaiter` to easily add waiter to dynamic
+Shiny-rendered elements from the UI.
+
 # waiter 0.2.2
 
 - Remove `console.log`
 - Add `image` argument to the waiter, allows using a background
 image on the waiter.
 - Fix `hide_on_render` [#94](https://github.com/JohnCoene/waiter/issues/94)
-- Fix full screen not covering entirety of body [#95](https://github.com/JohnCoene/waiter/issues/95)
 
 # waiter 0.2.1
 

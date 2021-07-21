@@ -6,26 +6,12 @@ globalVariables("private")
 #' 
 #' @keywords internal
 .random_name <- function() {
-	letters <- LETTERS %>% 
-		tolower() %>% 
-		sample()
+	rand <- sample(c(letters, 1:20), 40)
 
-	numbers <- 1:20 %>% 
-		sample() 
+	rand <- paste0(rand, collapse = "")
 
-	paste0(letters, numbers, collapse = "")
-}
-
-#' Check Session
-#' 
-#' Check whether session is valid.
-#' 
-#' @param x A session.
-#' 
-#' @keywords internal
-.check_session <- function(x){
-  if(is.null(x))
-    stop("invalid session, run this function inside your Shiny server.", call. = FALSE)
+  # ensure valid selector
+  paste0("waiter", rand)
 }
 
 #' Waitress Themes
@@ -36,17 +22,14 @@ globalVariables("private")
 #' 
 #' @keywords internal
 themes_to_js <- function(x) {
-  if (x == "overlay"){
-    "blueOverlay"
-  } else if (x == "overlay-radius") {
-    "blueOverlayRadius"
-  } else if (x == "overlay-opacity") {
-    "blueOverlayRadiusHalfOpacity"
-  } else if (x == "overlay-percent") {
-    "blueOverlayRadiusWithPercentBar"
-  } else {
-    "blue"
-  } 
+  switch(
+    x,
+    "overlay" = "blueOverlay",
+    "overlay-radius" = "blueOverlayRadius",
+    "overlay-opacity" = "blueOverlayRadiusHalfOpacity",
+    "overlay-percent" = "blueOverlayRadiusWithPercentBar",
+    "blue" 
+  )
 }
 
 # valid presets for checks
@@ -64,14 +47,10 @@ hostess_presets <- c(
 #' 
 #' @keywords internal
 .theme_or_value <- function(value, theme_var) {
-  opt <- .get_waiter_option(theme_var)
-
-  rez <- value # default to theme
-
-  if(is.null(value))
-    rez <- opt
-
-  return(rez)
+  if(!is.null(value))
+    return(value)
+  
+  .get_waiter_option(theme_var)
 }
 
 #' Get Waiter Option
@@ -87,7 +66,6 @@ hostess_presets <- c(
     theme_var,
     WAITER_HTML = .get_html(),
     WAITER_COLOR = .get_color(),
-    WAITER_LOGO = .get_logo(),
     WAITER_IMAGE = .get_image(),
     "" # default
   )
@@ -95,32 +73,15 @@ hostess_presets <- c(
 
 #' @rdname waiterOptionInternal
 .get_html <- function() {
-  html <- getOption("WAITER_HTML")
-  if(is.null(html))
-    html <- spin_1()
-  return(html)
+  getOption("WAITER_HTML", spin_1())
 }
 
 #' @rdname waiterOptionInternal
 .get_color <- function() {
-  color <- getOption("WAITER_COLOR")
-  if(is.null(color))
-    color <- "#333e48"
-  return(color)
-}
-
-#' @rdname waiterOptionInternal
-.get_logo <- function() {
-  logo <- getOption("WAITER_LOGO")
-  if(is.null(logo))
-    logo <- ""
-  return(logo)
+  getOption("WAITER_COLOR", "#333e48")
 }
 
 #' @rdname waiterOptionInternal
 .get_image <- function() {
-  image <- getOption("WAITER_IMAGE")
-  if(is.null(image))
-    image <- ""
-  return(image)
+  getOption("WAITER_IMAGE", "")
 }

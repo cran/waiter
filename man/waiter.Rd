@@ -3,17 +3,24 @@
 \name{waiter}
 \alias{waiter}
 \alias{use_waiter}
+\alias{useWaiter}
 \alias{waiter_use}
 \alias{waiter_show}
 \alias{waiter_show_on_load}
+\alias{waiterShowOnLoad}
 \alias{waiter_preloader}
+\alias{waiterPreloader}
 \alias{waiter_hide_on_render}
+\alias{waiterHideOnRender}
 \alias{waiter_on_busy}
+\alias{waiterOnBusy}
 \alias{waiter_hide}
 \alias{waiter_update}
 \title{Waiter}
 \usage{
-use_waiter(spinners = 1:7, include_js = TRUE)
+use_waiter(spinners = NULL, include_js = TRUE)
+
+useWaiter(spinners = NULL, include_js = TRUE)
 
 waiter_use(spinners = 1:7, include_js = TRUE)
 
@@ -26,20 +33,52 @@ waiter_show(
   hide_on_render = !is.null(id)
 )
 
-waiter_show_on_load(html = spin_1(), color = "#333e48", image = "")
+waiter_show_on_load(html = spin_1(), color = "#333e48", image = "", logo = "")
 
-waiter_preloader(html = spin_1(), color = "#333e48", image = "")
+waiterShowOnLoad(html = spin_1(), color = "#333e48", image = "", logo = "")
+
+waiter_preloader(
+  html = spin_1(),
+  color = "#333e48",
+  image = "",
+  fadeout = FALSE,
+  logo = ""
+)
+
+waiterPreloader(
+  html = spin_1(),
+  color = "#333e48",
+  image = "",
+  fadeout = FALSE,
+  logo = ""
+)
 
 waiter_hide_on_render(id)
 
-waiter_on_busy(html = spin_1(), color = "#333e48", logo = "", image = "")
+waiterHideOnRender(id)
+
+waiter_on_busy(
+  html = spin_1(),
+  color = "#333e48",
+  logo = "",
+  image = "",
+  fadeout = FALSE
+)
+
+waiterOnBusy(
+  html = spin_1(),
+  color = "#333e48",
+  logo = "",
+  image = "",
+  fadeout = FALSE
+)
 
 waiter_hide(id = NULL)
 
 waiter_update(id = NULL, html = NULL)
 }
 \arguments{
-\item{spinners}{Spinners to include. By default all the CSS files for
+\item{spinners}{Deprecated argument. Spinners to include. By default all the CSS files for
 all spinners are included you can customise this only that which you
 need in order to reduce the amount of CSS that needs to be loaded and
 improve page loading speed. There are 7 spinner kits. The spinner kit
@@ -55,7 +94,7 @@ or multiple spinner kits as a vector e.g.: \code{c(1,3,6)}.}
 
 \item{color}{Background color of loading screen.}
 
-\item{logo}{Path to logo to display.}
+\item{logo}{Path to logo to display. Deprecated.}
 
 \item{image}{Path to background image.}
 
@@ -63,6 +102,10 @@ or multiple spinner kits as a vector e.g.: \code{c(1,3,6)}.}
 when the plot in \code{id} is drawn. Note the latter will only work with
 shiny plots, tables, htmlwidgets, etc. but will not work with arbitrary
 elements.}
+
+\item{fadeout}{Use a fade out effect when the screen is removed.
+Can be a boolean, or a numeric indicating the number of
+milliseconds the effect should take.}
 }
 \description{
 Programatically show and hide loading screens.
@@ -85,8 +128,8 @@ Programatically show and hide loading screens.
 library(shiny)
 
 ui <- fluidPage(
-  use_waiter(), # dependencies
-  waiter_show_on_load(spin_fading_circles()), # shows before anything else 
+  useWaiter(), # dependencies
+  waiterShowOnLoad(spin_fading_circles()), # shows before anything else 
   actionButton("show", "Show loading for 5 seconds")
 )
 

@@ -20,6 +20,21 @@ then \code{hide} or meanwhile \code{update} the content of the waiter.
 
 \dontrun{Waiter$new()}
 }
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{fadeout}}{Set or get the fade out}
+
+\item{\code{color}}{Set or get the background color}
+
+\item{\code{image}}{Set of get the background image}
+
+\item{\code{session}}{Set or get the shiny session}
+
+\item{\code{html}}{Set or get the html content}
+}
+\if{html}{\out{</div>}}
+}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
@@ -42,6 +57,7 @@ then \code{hide} or meanwhile \code{update} the content of the waiter.
   color = NULL,
   logo = NULL,
   image = "",
+  fadeout = FALSE,
   hide_on_render = !is.null(id),
   hide_on_error = !is.null(id),
   hide_on_silent_error = !is.null(id)
@@ -58,9 +74,13 @@ applied to the entire body.}
 
 \item{\code{color}}{Background color of loading screen.}
 
-\item{\code{logo}}{Logo to display.}
+\item{\code{logo}}{Logo to display. Deprecated.}
 
 \item{\code{image}}{Path to background image of loading screen.}
+
+\item{\code{fadeout}}{Use a fade out effect when the screen is removed.
+Can be a boolean, or a numeric indicating the number of
+milliseconds the effect should take.}
 
 \item{\code{hide_on_render}}{Set to \code{TRUE} to automatically hide the waiter
 when the element in \code{id} is drawn. Note the latter will work with

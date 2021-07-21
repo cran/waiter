@@ -22,12 +22,28 @@ function get_offset(element) {
 }
 
 // elements to hide on recomputed
-var waiter_to_hide = [];
-var waiter_to_hide_on_error = [];
-var waiter_to_hide_on_silent_error = [];
+var waiter_to_hide = new Map();
+var waiter_to_fadeout = new Map();
+var waiter_to_hide_on_error = new Map();
+var waiter_to_hide_on_silent_error = new Map();
 
 // show waiter overlay
-function show_waiter(id, html, color, to_hide, hide_on_error, hide_on_silent_error, image){
+function show_waiter(
+  id = null, 
+  html, 
+  color = '#333e48', 
+  to_hide = false, 
+  hide_on_error = false, 
+  hide_on_silent_error = false, 
+  image = null,
+  fade_out = false
+){
+
+  if(html == null){
+    console.error("Missing html content");
+    return;
+  }
+
   // declare
   var dom,
       selector = 'body',
@@ -46,17 +62,13 @@ function show_waiter(id, html, color, to_hide, hide_on_error, hide_on_silent_err
   // allow missing for testing
   to_hide = to_hide || false;
 
-  // add to array
-  if(to_hide)
-    waiter_to_hide.push(id);
+  // set in maps
+  waiter_to_hide.set(id, to_hide);
+  waiter_to_fadeout.set(selector, fade_out);
+  waiter_to_hide_on_error.set(id, hide_on_error);
+  waiter_to_hide_on_silent_error.set(id, hide_on_silent_error);
 
-  if(hide_on_error)
-    waiter_to_hide_on_error.push(id);
-
-  if(hide_on_silent_error)
-    waiter_to_hide_on_silent_error.push(id);
-
-  el = get_offset(dom); // get dimensions
+  let el = get_offset(dom); // get dimensions
 
   if(id === null){
     el.height = window.innerHeight;
@@ -90,25 +102,28 @@ function show_waiter(id, html, color, to_hide, hide_on_error, hide_on_silent_err
   overlay_content.innerHTML = html;
   overlay_content.classList.add("waiter-overlay-content");
 
-  // add styles
+  // dynamic position
+  if(id == null)
+    overlay.style.position = "fixed";
+  else
+    overlay.style.position = "absolute";
+  
+  // dynamic dimensions
   overlay.style.height = el.height + 'px';
   overlay.style.width = el.width + 'px';
   overlay.style.top = el.top + 'px';
   overlay.style.left = el.left + 'px';
   overlay.style.backgroundColor = color;
-  overlay.style.position = "absolute";
-  overlay.style.zIndex = 9999;
   overlay.classList.add("waiter-overlay");
 
   if(image != null && image != ''){
     overlay.style.backgroundImage = "url('" + image + "')";
   }
 
-  if(id === null) {
-    overlay.classList.add("waiter-fullscreen");
-    bindEvents();
-  } else {
+  if(id !== null) {
     overlay.classList.add("waiter-local");
+  } else {
+    overlay.classList.add('waiter-fullscreen');
   }
   //overlay.style.animation = "expand .15s ease-in-out";
 
@@ -123,7 +138,7 @@ function show_waiter(id, html, color, to_hide, hide_on_error, hide_on_silent_err
     Shiny.setInputValue(id + "_waiter_shown", true, {priority: 'event'});
   }
   catch(err) {
-    console.log("waiter_show_on_load - shiny not connected yet:", err.message);
+    console.log("waiterShowOnLoad - shiny not connected yet:", err.message);
   }
   
 }
@@ -131,29 +146,30 @@ function show_waiter(id, html, color, to_hide, hide_on_error, hide_on_silent_err
 function hide_waiter(id){
 
   var selector = 'body';
-
   if(id !== null)
     selector = '#' + id;
 
-  var dom = document.querySelector(selector);
+  let overlay = $(selector).find(".waiter-overlay");
+  
+  if(overlay.length == 0)
+    return;
+  
+  let timeout = 250;
+  if(waiter_to_fadeout.get(selector)){
+    let value = waiter_to_fadeout.get(selector);
 
-  var overlay = dom.getElementsByClassName("waiter-overlay");
+    if(typeof value == 'boolean')
+      value = 500;
 
-  if(overlay.length > 0){
-    overlay[0].style.opacity = '0';
-    setTimeout(function(){
-      try {
-        dom.removeChild(overlay[0]);
-        hide_recalculate(id);
-      } catch {
-        console.log("error removing waiter from", id)
-      } finally {
-        Shiny.setInputValue(id + "_waiter_hidden", true, {priority: 'event'});
-      }
-    }, 250)
-  } else{
-    console.log("no waiter on", id);
+    $(overlay).fadeOut(value);
+
+    timeout = timeout + value;
   }
+  
+  // this is to avoid the waiter screen from flashing
+  setTimeout(function(){
+    overlay.remove();
+  }, timeout);
 
 }
 
@@ -167,6 +183,9 @@ function update_waiter(id, html){
   var dom = document.querySelector(selector);
 
   var overlay = dom.getElementsByClassName("waiter-overlay-content");
+  
+  if(overlay.length == 0)
+    return;
 
   if(overlay.length > 0)
     overlay[0].innerHTML = html;
@@ -175,10 +194,18 @@ function update_waiter(id, html){
   
 }
 
+// storage to avoid multiple CSS injections
+hiddenRecalculating = new Map();
+
 function hide_recalculate(id){
 
   if(id === null)
     return ;
+  
+  if(hiddenRecalculating.get(id))
+    return;
+  
+  hiddenRecalculating.set(id, true);
 
   var css = '#' + id + '.recalculating {opacity: 1.0 !important; }',
       head = document.head || document.getElementsByTagName('head')[0],
@@ -194,26 +221,28 @@ function hide_recalculate(id){
   head.appendChild(style);
 }
 
+// currently unused but may be useful for others using JS API
 function show_recalculate(id){
   $(id + "-waiter-recalculating").remove();
 }
 
 // remove when output receives value
 $(document).on('shiny:value', function(event) {
-  if(waiter_to_hide.indexOf(event.name) >= 0){
+  if(waiter_to_hide.get(event.name)){
     hide_waiter(event.name);
   }
 });
 
 // remove when output errors
 $(document).on('shiny:error', function(event) {
-  if(event.error.type == null && waiter_to_hide_on_error.indexOf(event.name) >= 0){
+  if(event.error.type == null && waiter_to_hide_on_error.get(event.name)){
     hide_waiter(event.name);
-  } else if (event.error.type != null && waiter_to_hide_on_silent_error.indexOf(event.name) >= 0){
+  } else if (event.error.type != null && waiter_to_hide_on_silent_error.get(event.name)){
     hide_waiter(event.name);
   }
 });
 
+// On resize we need to resize the waiter screens too
 window.addEventListener("resize", function(){
   let waiters = document.getElementsByClassName("waiter-local");
   let fs = document.getElementsByClassName("waiter-fullscreen");
@@ -230,14 +259,3 @@ window.addEventListener("resize", function(){
     waiter.style.height = window.innerHeight + 'px';
   }
 });
-
-function bindEvents(){
-  document.onscroll = function(){
-    let waiter = document.getElementsByClassName("waiter-fullscreen");
-
-    if(waiter === undefined)
-      return;
-     
-    waiter[0].scrollIntoView();
-  }
-}

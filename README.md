@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<div data-align="center">
+<div align="center">
 
 <img src="./man/figures/logo.png" height = "200px" />
 
@@ -9,19 +9,15 @@ Loading screens for Shiny
 
 <!-- badges: start -->
 
-[![Travis build
-status](https://travis-ci.org/JohnCoene/waiter.svg?branch=master)](https://travis-ci.org/JohnCoene/waiter)
 ![R-CMD-check](https://github.com/JohnCoene/waiter/workflows/R-CMD-check/badge.svg)
-[![CircleCI build
-status](https://circleci.com/gh/JohnCoene/waiter.svg?style=svg)](https://circleci.com/gh/JohnCoene/waiter)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/waiter)](https://CRAN.R-project.org/package=waiter)
 <!-- badges: end -->
 
 [Website](https://waiter.john-coene.com) |
 [Demo](https://shiny.john-coene.com/waiter/) | [Get
-Started](https://waiter.john-coene.com/#/waiter) | [Cheat
-Sheet](https://waiter.john-coene.com/_assets/cheatsheet.pdf)
+Started](https://waiter.john-coene.com/#/waiter/intro) | [Cheat
+Sheet](https://waiter.john-coene.com/#/cheatsheet)
 
 </div>
 
@@ -47,7 +43,7 @@ the [website](https://waiter.john-coene.com) for more.
 
 To use the waiter:
 
-1.  Include `use_waiter` in your UI.
+1.  Include `useWaiter` in your UI.
 2.  Trigger `waiter_show` to show the waiting screen.
 3.  Eventually trigger `waiter_hide` to hide the loading screen.
 
@@ -58,7 +54,7 @@ library(shiny)
 library(waiter)
 
 ui <- fluidPage(
-  use_waiter(), # include dependencies
+  useWaiter(), # include dependencies
   actionButton("show", "Show loading for 3 seconds")
 )
 
@@ -104,7 +100,7 @@ library(shiny)
 library(waiter)
 
 ui <- fluidPage(
-  use_waitress(),
+  useWaitress(),
   p("App content")
 )
 

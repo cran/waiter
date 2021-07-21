@@ -4,7 +4,7 @@
 #' 
 #' @name garcon
 #' @export
-use_garcon <- function(){
+useGarcon <- function(){
   singleton(
     tags$head(
       tags$script(
@@ -15,6 +15,13 @@ use_garcon <- function(){
       )
     )
   )
+}
+
+#' @rdname garcon
+#' @export
+use_garcon <- function(){
+  # to deprecate
+  useGarcon()
 }
 
 #' @export
@@ -40,7 +47,6 @@ Garcon <- R6::R6Class(
         stop("Missing `image`", call. = FALSE)
 
       session <- shiny::getDefaultReactiveDomain()
-      .check_session(session)
 
       msg <- list(
         image = image, 

@@ -6,6 +6,13 @@
 #' @name hostess
 #' @export
 use_hostess <- function(){
+  # to deprecate
+  useHostess()
+}
+
+#' @rdname hostess
+#' @export
+useHostess <- function(){
   singleton(
     tags$head(
       tags$link(
@@ -68,7 +75,6 @@ Hostess <- R6::R6Class(
       }
 
       session <- shiny::getDefaultReactiveDomain()
-      .check_session(session)
       private$.session <- session
       private$.id <- id
       private$.min <- min
@@ -360,8 +366,8 @@ Hostess <- R6::R6Class(
 #' path <- "M10 10L90 30"
 #' 
 #' ui <- fluidPage(
-#'  use_waiter(),
-#'  use_hostess(),
+#'  useWaiter(),
+#'  useHostess(),
 #'  actionButton("draw", "redraw"),
 #'  plotOutput("plot")
 #' )

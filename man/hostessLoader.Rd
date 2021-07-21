@@ -109,8 +109,8 @@ library(waiter)
 path <- "M10 10L90 30"
 
 ui <- fluidPage(
- use_waiter(),
- use_hostess(),
+ useWaiter(),
+ useHostess(),
  actionButton("draw", "redraw"),
  plotOutput("plot")
 )
