@@ -1,3 +1,16 @@
+# waiter 0.2.4
+
+- Added `httr_progress` function to use  the waitress or
+the attendant instead of `httr::progress`.
+- Added `withProgressWaitress`, `setProgressWaitress`, and
+`incProgressWairess` analogous to the same functions in shiny.
+- Added `withProgressAttendant`,
+`incProgressAttendant`, and `setProgressAttendant`.
+- Fix major issue with `Hostess`, it was basically broken
+[#108](https://github.com/JohnCoene/waiter/issues/108).
+- Add `withWaiter` as requested in 
+[#105](https://github.com/JohnCoene/waiter/issues/105)
+
 # waiter 0.2.3
 
 - Fix [#95](https://github.com/JohnCoene/waiter/issues/95) with different CSS for full screen (`position: fixed`).
@@ -17,6 +30,10 @@ the server.
 - Improve documentation, new site.
 - Added function `autoWaiter` to easily add waiter to dynamic
 Shiny-rendered elements from the UI.
+- Use webpack and packer to minify and optimise hostess code.
+- Added `attendant` progress bars, for easy progress display without
+bringing in additional dependencies.
+- Document JavaScript [internals](https://waiter.john-coene.com/jsdoc/tutorial-waiter)
 
 # waiter 0.2.2
 
